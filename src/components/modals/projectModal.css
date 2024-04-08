@@ -1,63 +1,86 @@
 .ProjectModal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #33333392;
-    z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #33333392;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .project-info-container {
+    text-align: center;
+  }
+
+  .project-links {
+    margin-top: 1rem;
+    
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  .project-text {
+    width: 80%;
+    margin: 0 auto;
+    font-weight: 200;
+  }
+  .heading {
+    margin-bottom: 1.5rem;
+    text-decoration: 3px solid var(--accent-color) underline;
+  }
+
+  .scroll-images {
+    height: 85vh;
+    padding: 3rem;
+    overflow-y: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    border-radius: 1rem;
+    gap: 1.5rem;
+    width: 90%;
+    align-items: center;
+    background-color: #4e4e4e;
+  }
 
-    .scroll-images {
-        height: 85vh;
-        padding: 3rem;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        border-radius: 1rem;
-        gap: 3rem;
-        width: 100%;
-        align-items: center;
-    }
+  .modal-img {
+    width: 100%;
+    height: 30rem;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
 
-
-    .modal-img {
-        width: 90%;
-        height: 30rem;
-        object-fit: cover;
-        border-radius: 1rem;
-    }
-
-    button {
-        padding: .3rem 1rem;
-        margin-top: 1rem;
-        border: 2px solid black;
-        background-color: white;
-        color: black;
-        font-family: 'Poppins', sans-serif;
-        border-radius: 8px;
-        cursor: pointer;
-        width: 50%;
-        font-size: 1.2rem;
-        
-    }
+  button {
+    padding: .5rem 1rem;
+    margin-top: 1rem;
+    border: transparent;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 50%;
+    font-size: 1.3rem;
+    background-color: black;
+    background-color: var(--accent-color);
+    color: white;
+    text-transform: uppercase;
+  }
 }
 
 @media screen and (max-width: 768px) {
 
-    .ProjectModal{
+  .ProjectModal{
 
-        .scroll-images {
-            padding: .3rem;
-            gap: 2rem;
-        }
-        .modal-image {
-            width: 100%;
-            height: auto;
-        }
-
+    .scroll-images {
+      padding: .3rem;
+      gap: 2rem;
     }
+    .modal-image {
+      width: 100%;
+      height: auto;
+    }
+
+  }
 }

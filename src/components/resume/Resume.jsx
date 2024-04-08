@@ -11,11 +11,10 @@ const Resume = () => {
     <section className={`Resume ${lightTheme ? 'ResumeUnicorn' : ''}`} id="resume">
       <div className='padding-wrapper width-wrapper'>
         <div className='top-resume'>
-            <h2 className='title heading-resume'>Experience <span className='accent'>&</span> Education</h2>
+          <h2 className='title heading-resume'>Experience <span className='accent'>&</span> Education</h2>
         </div>
         <div className='bottom-resume'>
-
-        <div className='right-resume'>
+          <div className='right-resume'>
             <h3>Experience</h3>
 
             <div className='card card-education'>
@@ -48,29 +47,29 @@ const Resume = () => {
 
 
           </div>
-        <div className='left-resume'>
-            <h3>Education</h3>
-            <div className='card card-education'>
-              <div className='icon icon-margin'><FaGraduationCap/></div>
-              <div className='card-content'>
-                <h2>KYH Yrkeshögskola</h2>
-                <h3>Frontend Developer 2022 - present</h3>
-                <p>Mastering frontend development, set to graduate in May 2024.</p>
+          <div className='left-resume'>
+              <h3>Education</h3>
+              <div className='card card-education'>
+                <div className='icon icon-margin'><FaGraduationCap/></div>
+                <div className='card-content'>
+                  <h2>KYH Yrkeshögskola</h2>
+                  <h3>Frontend Developer 2022 - present</h3>
+                  <p>Mastering frontend development, set to graduate in May 2024.</p>
+                </div>
               </div>
-            </div>
 
-            <div className='card card-education'>
-              <div className='icon icon-margin'><FaGraduationCap/></div>
-              <div className="card-content">
-                <h2>Karlstads University</h2>
-                <h3>Preschool teacher 2014 - 2018</h3>
-                <p>Pedagogy, psychology and leadership.</p>
+              <div className='card card-education'>
+                <div className='icon icon-margin'><FaGraduationCap/></div>
+                <div className="card-content">
+                  <h2>Karlstads University</h2>
+                  <h3>Preschool teacher 2014 - 2018</h3>
+                  <p>Pedagogy, psychology and leadership.</p>
+                </div>
               </div>
-            </div>
 
+          </div>
         </div>
-        </div>
-        </div>
+      </div>
     </section>
   )
 }

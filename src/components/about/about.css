@@ -1,45 +1,46 @@
 .About{
   background: linear-gradient(to bottom, rgb(33, 33, 33), rgb(37, 37, 37));
-}
 
-.about-wrapper{
-  padding-bottom: 3rem;
-  display: flex;
-  gap: 3rem;
-  align-items: center;
-}
+  .about-wrapper{
+    padding-bottom: 3rem;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  .about-me-image{
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+  }
 
-.about-me-image{
-  width: 100%;
-  border-radius: 8px;
-  display: block;
-}
+  .left-container-about {
+    flex: 4;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .right-container-about{
+    flex: 5;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-.left-container-about {
-  flex: 4;
-  position: relative;
-  overflow: hidden;
-}
+  .right-container-about p{
+    margin-top: 1rem;
+  }
+  
+  .stricken{
+    text-decoration: line-through;
+    font-style: italic;
+  }
 
-.right-container-about{
-  flex: 5;
-  line-height: 1.5;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  .icons-skills{
+    margin-top: 1rem;
+  }
 
-.right-container-about p{
-  margin-top: 1rem;
-}
-
-.stricken{
-  text-decoration: line-through;
-  font-style: italic;
-}
-
-.icons-skills{
-  margin-top: 1rem;
 }
 
 .AboutUnicorn {
@@ -51,9 +52,10 @@
   .icon {
     color: var(--primary-pink-two)
   }
+
   .icon:hover {
     color: hsl(332, 99%, 65%);
-}
+  }
   
   .heading-about {
     font-size: 2.5rem;
@@ -72,24 +74,26 @@
 }
 
 @media screen and (max-width: 768px) {
-  .about-wrapper{
-    flex-direction: column;
-  }
-
-  .about-wrapper h2, .icons-skills {
-    text-align: center;
-  }
-
-  .icons-skills{
-    margin-top: 3rem;
-  }
-
-  .about-me-image{
-    width: 70%;
-    margin: 0 auto;
-  }
-
   .About{
     padding-top: 0rem;
+
+    .about-wrapper{
+      flex-direction: column;
+    }
+  
+    .about-wrapper h2, .icons-skills {
+      text-align: center;
+    }
+  
+    .icons-skills{
+      margin-top: 3rem;
+    }
+  
+    .about-me-image{
+      width: 70%;
+      margin: 0 auto;
+    }
+
   }
+
 }

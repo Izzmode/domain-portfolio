@@ -13,6 +13,7 @@ const footer = () => {
       behavior: 'smooth',
     });
   };
+  
   return (
     <div className={`Footer ${lightTheme ? 'FooterUnicorn' : ''}`}>
       <div className='width-wrapper width-wrapper-footer'>

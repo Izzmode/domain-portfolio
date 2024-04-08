@@ -1,145 +1,145 @@
 .Resume {
-    flex-direction: column;
-    background-color: #282828;
+  flex-direction: column;
+  background-color: #282828;
 }
 
 
 .ResumeUnicorn {
-    background-color: white;
-    color: #333333;
+  background-color: white;
+  color: #333333;
 
-    .card-education{
-        border-top: 1px solid var(--primary-pink);
-    }
+  .card-education{
+    border-top: 1px solid var(--primary-pink);
+  }
 
-    .card-education:hover {
-        background-color: hsl(331, 100%, 98%);
-    }
+  .card-education:hover {
+    background-color: hsl(331, 100%, 98%);
+  }
 
-    .icon {
-        color: var(--primary-pink-two)
-    }
+  .icon {
+    color: var(--primary-pink-two)
+  }
 
-    .heading-resume {
-        font-size: 2.5rem;
-        font-family: 'BartexFont', sans-serif;
-        color: white;
-        text-shadow: 
-        -1.2px -1.2px 0 var(--primary-pink-two),  
-        1.2px -1.2px 0 var(--primary-pink-two),
-       -1.2px  1.2px 0 var(--primary-pink-two),
-        1.2px  1.2px 0 var(--primary-pink-two);
-    }
+  .heading-resume {
+    font-size: 2.5rem;
+    font-family: 'BartexFont', sans-serif;
+    color: white;
+    text-shadow: 
+    -1.2px -1.2px 0 var(--primary-pink-two),  
+    1.2px -1.2px 0 var(--primary-pink-two),
+    -1.2px  1.2px 0 var(--primary-pink-two),
+    1.2px  1.2px 0 var(--primary-pink-two);
+  }
 
-    .accent {
-        color: white;
-        text-shadow: 
-        -1.2px -1.2px 0 var(--primary-pink-two),  
-         1.2px -1.2px 0 var(--primary-pink-two),
-        -1.2px  1.2px 0 var(--primary-pink-two),
-         1.2px  1.2px 0 var(--primary-pink-two);
-    }
+  .accent {
+    color: white;
+    text-shadow: 
+    -1.2px -1.2px 0 var(--primary-pink-two),  
+      1.2px -1.2px 0 var(--primary-pink-two),
+    -1.2px  1.2px 0 var(--primary-pink-two),
+      1.2px  1.2px 0 var(--primary-pink-two);
+  }
 
 }
 
 .bottom-resume{
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 .left-resume, .right-resume{
-    flex: 1;
+  flex: 1;
 }
 
 
 .card-education{
-    border-top: 1px solid var(--accent-color);
-    padding: 1rem;
-    padding-inline: 3rem;
-    /* margin-top: 1rem; */
-    padding-bottom: 1rem;
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 130px;
+  border-top: 1px solid var(--accent-color);
+  padding: 1rem;
+  padding-inline: 3rem;
+  /* margin-top: 1rem; */
+  padding-bottom: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 130px;
 }
 
 .card-education:first-of-type {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 .card-education:hover{
-    background-color: hsl(0, 0%, 16.1%); 
+  background-color: hsl(0, 0%, 16.1%); 
 }
 
 .card-education h2{
-    font-size: 1.5rem;
-    font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .card-education h3{
-    font-size: 1rem;
-    font-weight: 400;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .card-education p{
-    font-size: .9rem;
-    font-weight: 300;
-    margin-top: .5rem;
+  font-size: .9rem;
+  font-weight: 300;
+  margin-top: .5rem;
 }
 
 
 .students-avatar{
-    width: 300px;
-    color: #fff;
-    background-position: center center;
-    height: 250px;
-    object-fit: cover;
+  width: 300px;
+  color: #fff;
+  background-position: center center;
+  height: 250px;
+  object-fit: cover;
 }
 
 .title-wrapper-card{
-    display: flex;
-    gap: .5rem;
-    align-items: baseline;
+  display: flex;
+  gap: .5rem;
+  align-items: baseline;
 }
 
 .icon.icon-briefcase{
-    font-size: 1.7rem;
+  font-size: 1.7rem;
 }
 
 .Resume .icon{
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 .card-content{
-    margin-left: 1.5rem;
+  margin-left: 1.5rem;
 }
 
 @media screen and (max-width: 768px) {
-    .card-education h2{
-        font-size: 1rem;
-    }
+  .card-education h2{
+    font-size: 1rem;
+  }
+  
+  .card-education h3{
+    font-size: .9rem;
+  }
     
-    .card-education h3{
-        font-size: .9rem;
-    }
+  .card-education p{
+    font-size: .8rem;
+  }
+
+  .left-resume, .right-resume{
+    width: 100%;
+  }
     
-    .card-education p{
-        font-size: .8rem;
-    }
+  .card-education{
+    padding-inline: 0rem;
+  }
 
-    .left-resume, .right-resume{
-        width: 100%;
-    }
-    
-    .card-education{
-        padding-inline: 0rem;
-    }
+  .card-education::before {
+    content: none;
+  }
 
-    .card-education::before {
-        content: none;
-    }
-
-    .card-education{
-        min-height: 150px; 
-    }
+  .card-education{
+    min-height: 150px; 
+  }
 }

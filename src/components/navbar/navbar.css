@@ -78,9 +78,9 @@
 }
 
 .ul-header a{
-color: white;
-text-decoration: none;
-list-style: none;
+  color: white;
+  text-decoration: none;
+  list-style: none;
 }
 
 .ul-header .active{
@@ -157,7 +157,7 @@ list-style: none;
     -.6px  .6px 0 #fff,
      .6px  .6px 0 #fff;
      font-weight: 600;
-}
+  }
 
   .moon-icon {
     width: 37px;
@@ -173,7 +173,7 @@ list-style: none;
     transition: 0.4s;
   }
 
-  .logo{
+  .logo {
     font-size: 1.5rem;
     border: none;
     border: 3px solid var(--primary-pink-two);
