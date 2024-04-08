@@ -1,0 +1,63 @@
+.ProjectModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #33333392;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .scroll-images {
+        height: 85vh;
+        padding: 3rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        border-radius: 1rem;
+        gap: 3rem;
+        width: 100%;
+        align-items: center;
+    }
+
+
+    .modal-img {
+        width: 90%;
+        height: 30rem;
+        object-fit: cover;
+        border-radius: 1rem;
+    }
+
+    button {
+        padding: .3rem 1rem;
+        margin-top: 1rem;
+        border: 2px solid black;
+        background-color: white;
+        color: black;
+        font-family: 'Poppins', sans-serif;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 50%;
+        font-size: 1.2rem;
+        
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .ProjectModal{
+
+        .scroll-images {
+            padding: .3rem;
+            gap: 2rem;
+        }
+        .modal-image {
+            width: 100%;
+            height: auto;
+        }
+
+    }
+}

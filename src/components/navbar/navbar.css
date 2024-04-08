@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+.Navbar{
+  padding-top: 1.5rem;
+  padding-bottom: 1.3rem;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  background-color: #282828;
+}
+
+.rainbow-li {
+  cursor: pointer;
+  margin-right: 3rem;
+}
+
+.rainbow-icon-wrapper {
+  position: relative;
+}
+
+.rainbow-icon {
+  width: 37px;
+  height: 30px;
+  color: var(--fifth-pink);
+}
+
+.shimmer-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 30px;
+  animation: left 1s linear forwards, disappear 1s linear forwards 0.5s;
+
+  background: linear-gradient(100deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 80%
+  );
+}
+
+@keyframes left {
+  0% {
+    left: -40%;
+    opacity: 0;
+  }
+  100% {
+    left: 50%;
+    opacity: 1;
+  }
+}
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.header-wrapper{
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.ul-header{
+  display: flex;
+  gap: 2rem;
+  font-size: 1.3rem;
+}
+
+.ul-header li {
+  text-decoration: none;
+  list-style: none;
+}
+
+.ul-header a{
+color: white;
+text-decoration: none;
+list-style: none;
+}
+
+.ul-header .active{
+  color: var(--accent-color);
+}
+
+.logo{
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  transition: transform 0.8s ease;
+}
+
+.logo:hover {
+  transform: rotateY(360deg);
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-toggle .bar {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+.menu-open .menu-toggle .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-9px, 9px);
+}
+
+.menu-open.NavbarUnicorn .menu-toggle .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-7px, 8px);
+  }
+
+.menu-open .menu-toggle .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-open .menu-toggle .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-9px, -10px);
+}
+
+.NavbarUnicorn {
+  padding-top: 1.5rem;
+  padding-bottom: 1.3rem;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  color: black;
+  background-color: transparent;
+  top: 0;
+
+  .ul-header a {
+    text-decoration: none;
+    list-style: none;
+    color: black;
+  }
+
+  .ul-header .active{
+    color: var(--primary-pink-two);
+    text-shadow: 
+    -.6px -.6px 0 #fff,  
+     .6px -.6px 0 #fff,
+    -.6px  .6px 0 #fff,
+     .6px  .6px 0 #fff;
+     font-weight: 600;
+}
+
+  .moon-icon {
+    width: 37px;
+    height: 30px;
+    color: var(--primary-color)
+  }
+
+  .menu-toggle .bar {
+    width: 30px;
+    height: 2px;
+    background-color: black;
+    margin: 5px 0;
+    transition: 0.4s;
+  }
+
+  .logo{
+    font-size: 1.5rem;
+    border: none;
+    border: 3px solid var(--primary-pink-two);
+    color: white;
+    text-shadow: 
+    -1px -1px 0 var(--primary-pink-two),  
+    1px -1px 0 var(--primary-pink-two),
+    -1px  1px 0 var(--primary-pink-two),
+    1px  1px 0 var(--primary-pink-two);
+      background-color: transparent;
+      cursor: default;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .ul-header {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    width: 100%;
+    background-color: #282828;
+    font-size: 2rem;
+  }
+
+  .header-wrapper{
+    align-items: center;
+  }
+
+  .ul-header.open {
+    display: flex;
+    padding-bottom: 2rem;
+    height: 100vh;
+    top: 5rem;
+  }
+
+  .rainbow-li {
+    margin-right: 0;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .NavbarUnicorn {
+  
+    .ul-header {
+      background-color: #fff;
+    }
+
+    .ul-header.open {
+      top: 0;
+      padding-top: 5rem;
+      z-index: 4;
+    }
+    .ul-header.open li {
+      z-index: 4;
+    }
+
+    .menu-toggle {
+      z-index: 5;
+    }
+  }
+}
+  

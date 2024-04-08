@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+@font-face {
+  font-family: 'BartexFont';
+  src: url('./fonts/Bartex-2Opnd.ttf') format('truetype');
+}
+
+:root {
+  --primary-color: #282828;
+  --secondary-color: #333333;
+  --gradiant-second: linear-gradient(to right, #2F2F2F, #333333);
+  --darker-color: #202020;
+  --accent-color: hsl(332, 35%, 55%);
+  --font-poppins: 'Poppins', sans-serif;
+  --font-color: #f8f8f8;
+  --primary-pink: #D92579;
+  --primary-pink-two: hsl(332, 89%, 60%);
+  --secondary-pink: #AE1E61;
+  --third-pink: #A6033F;
+  --fourth-pink: #EC5080;
+  --fifth-pink: #f0a8ca;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* background-color: #282828; */
+  font-family: var(--font-poppins);
+  color: white;
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.width-wrapper {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.accent{
+  /* background: linear-gradient(232deg, #E792C1 -0.46%, #D197B9 50%, #C17CAB 89.11%); */
+  background:hsl(332, 35%, 55%); 
+  -webkit-background-clip: text;
+  color: transparent; 
+  display: inline-block;
+}
+
+.icon {
+  color: hsl(332, 35%, 55%);
+  /* color: #f8f8f8; */
+  font-size: 2rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-margin{
+  margin-left: 1rem;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+  color: hsl(332, 35%, 60%);
+}
+
+.nav-link{
+  cursor: pointer;
+}
+
+.title{
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.padding-wrapper {
+  padding-top: 6rem;
+}
+
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  
+  .width-wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+
+
