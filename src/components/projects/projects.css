@@ -23,7 +23,8 @@
     height: 320px;
     box-shadow: 7px 7px 15px rgb(28, 28, 28); 
     box-shadow: 7px 7px 15px rgb(28, 28, 28); 
-    transition: transform 0.3s ease, opacity 0.3s ease
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor:default;
   }
 
   .card-projects:hover{
@@ -49,6 +50,10 @@
     text-align: center;
     opacity: 0;
     transition: opacity 0.3s ease;
+  }
+
+  .click-for-modal {
+    margin-top: 2rem;
   }
 
   .projects-wrapper{

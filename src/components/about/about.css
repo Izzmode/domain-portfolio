@@ -1,26 +1,20 @@
 .About{
   background: linear-gradient(to bottom, rgb(33, 33, 33), rgb(37, 37, 37));
 
-  .about-wrapper{
+  .about-wrapper {
     padding-bottom: 3rem;
     display: flex;
     gap: 3rem;
     align-items: center;
   }
   
-  .about-me-image{
-    width: 100%;
-    border-radius: 8px;
-    display: block;
-  }
-
-  .left-container-about {
+  .image-container-about {
     flex: 4;
     position: relative;
     overflow: hidden;
   }
-  
-  .right-container-about{
+
+  .text-container-about {
     flex: 5;
     line-height: 1.5;
     display: flex;
@@ -28,10 +22,16 @@
     justify-content: space-between;
   }
 
-  .right-container-about p{
+  .text-container-about p{
     margin-top: 1rem;
   }
-  
+
+  .about-me-image{
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+  }
+
   .stricken{
     text-decoration: line-through;
     font-style: italic;
@@ -43,7 +43,7 @@
 
 }
 
-.AboutUnicorn {
+.AboutLightTheme {
   background: white;
   margin-top: -2rem;
   color: var(--secondary-color);
@@ -68,9 +68,6 @@
       1.2px  1.2px 0 var(--primary-pink-two);
   }
 
-  .about-wrapper{
-    padding-top: 5rem;
-  }
 }
 
 @media screen and (max-width: 768px) {

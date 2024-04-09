@@ -15,7 +15,7 @@ const footer = () => {
   };
   
   return (
-    <div className={`Footer ${lightTheme ? 'FooterUnicorn' : ''}`}>
+    <div className={`Footer ${lightTheme ? 'FooterLightTheme' : ''}`}>
       <div className='width-wrapper width-wrapper-footer'>
         <div> 
           <p>By Izabelle Olofsson &copy; 2024</p>

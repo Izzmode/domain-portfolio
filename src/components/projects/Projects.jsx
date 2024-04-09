@@ -72,24 +72,6 @@ const Projects = () => {
 
   }
 
-  // const handleClick = (string) => {
-  //   if(window.innerWidth < 1000) {
-  //     return
-  //   }
-
-  //   const matchedImages = [];
-  
-  //   images.forEach((img) => {
-  //     const keys = Object.keys(img);
-  //     if (keys.includes(string)) {
-  //       matchedImages.push({ image: img[keys[0]] });
-  //     }
-  //   });
-  
-  //   setImagesProps(matchedImages);
-  //   setShowModal(true)
-  // };
-
   return (
     <section className={`Projects ${lightTheme ? 'ProjectsUnicorn' : ''}`} id="projects">
       { showModal && <ProjectModal setShowModal={setShowModal} project={projectForModal}/>}
@@ -111,7 +93,7 @@ const Projects = () => {
                       <h2>SeenThis website</h2>
                       <p>During my internship I got the opportunity to create new and update existing pages to the SeenThis website.
                       </p>
-                      <p>Click on this image to get a sneak peak!</p>
+                      <p className="click-for-modal">Click on this image to get a sneak peak!</p>
                   </div>
               </div>
           </div>

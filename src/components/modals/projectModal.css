@@ -28,6 +28,7 @@
     margin: 0 auto;
     font-weight: 200;
   }
+  
   .heading {
     margin-bottom: 1.5rem;
     text-decoration: 3px solid var(--accent-color) underline;
@@ -62,25 +63,34 @@
     cursor: pointer;
     width: 50%;
     font-size: 1.3rem;
-    background-color: black;
     background-color: var(--accent-color);
     color: white;
     text-transform: uppercase;
   }
 }
 
-@media screen and (max-width: 768px) {
+.ProjectModalLightTheme {
+  .scroll-images {
+    background-color: white;
+    color: black;
 
-  .ProjectModal{
-
-    .scroll-images {
-      padding: .3rem;
-      gap: 2rem;
+    a {
+      color: #333;
+      /* text-decoration: 1px solid var(--primary-pink-two) underline; */
     }
-    .modal-image {
-      width: 100%;
-      height: auto;
-    }
+  }
 
+  button {
+    background-color: var(--primary-pink-two);
+    color: white;
+  }
+
+  .heading {
+    margin-bottom: 1.5rem;
+    text-decoration: 3px solid var(--primary-pink-two) underline;
+  }
+
+  .modal-img {
+    box-shadow: 3px 3px 7px rgb(169, 169, 169); 
   }
 }

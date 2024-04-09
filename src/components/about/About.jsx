@@ -11,13 +11,13 @@ const About = () => {
   const { lightTheme } = useContext(LightThemeContext)
 
   return (
-    <section className={`About ${lightTheme ? 'AboutUnicorn' : ''}`} id="about">
-      <div className='width-wrapper width-wrapper-about padding-wrapper'>
+    <section className={`About ${lightTheme ? 'AboutLightTheme' : ''}`} id="about">
+      <div className='width-wrapper padding-wrapper'>
         <div className='about-wrapper'>
-          <div className="left-container-about">
+          <div className="image-container-about">
             <img src={lightTheme ? portfolioImageColor : portfolioImage} alt="avatar image"  className='about-me-image'/>
           </div>
-          <div className="right-container-about">
+          <div className="text-container-about">
             <div className='about-text'>
               <h2 className='heading-about'>Who am I?</h2>
               <p>
