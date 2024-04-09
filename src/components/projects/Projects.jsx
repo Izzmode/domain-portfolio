@@ -18,7 +18,7 @@ import techSpaceVenue from '../../assets/techspace_venue.png'
 import techSpaceVenueBooking from '../../assets/techspace_venueBooking.png'
 import seenThisWebScopes from '../../assets/seenThisWeb_types-of-scopes.png'
 import { LightThemeContext } from '../../context/LightThemeContext';
-import ProjectModal from "../modals/projectModal";
+import ProjectModal from "../modals/ProjectModal";
 import './projects.css'
 
 const Projects = () => {
