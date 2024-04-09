@@ -69,17 +69,16 @@ const Projects = () => {
       setProjectForModal(modalData[string])
       setShowModal(true)
     }
-
   }
 
   return (
-    <section className={`Projects ${lightTheme ? 'ProjectsUnicorn' : ''}`} id="projects">
+    <section className={`Projects ${lightTheme ? 'ProjectsLightTheme' : ''}`} id="projects">
       { showModal && <ProjectModal setShowModal={setShowModal} project={projectForModal}/>}
       <div className='padding-wrapper width-wrapper'>
         <h2 className='title heading-projects'>Recent <span className='accent'>projects</span></h2>
         <div className="projects-wrapper">
           <div className="projects-wrapper-top">
-            <div className="card card-projects" onClick={() => handleClick('techSpace')}>
+            <div className="card-projects" onClick={() => handleClick('techSpace')}>
               <img src={techspace} alt="" className='projects-image'/>
               <div className="projects-text">
                 <h2>TechSpace</h2>
@@ -87,7 +86,7 @@ const Projects = () => {
                 <p className="click-for-modal">Click on this image to get a sneak peak!</p>
               </div>
             </div>
-              <div className="card card-projects" onClick={() => handleClick('seenThisWeb')}>
+              <div className="card-projects" onClick={() => handleClick('seenThisWeb')}>
                   <img src={seenThisWeb} alt="SeenThis website" className='projects-image'/>
                   <div className="projects-text">
                       <h2>SeenThis website</h2>
@@ -98,14 +97,14 @@ const Projects = () => {
               </div>
           </div>
           <div className="projects-wrapper-bottom">
-            <div className="card card-projects">
+            <div className="card-projects">
               <img src={typescriptProject} alt="" className='projects-image' />
               <div className="projects-text">
                 <h2>Typescript Project</h2>
                 <p>Typescript project with CRUD operations and a shopping cart, utilizing context for efficient data storage.</p>
               </div>
             </div>
-            <div className="card card-projects" onClick={() => handleClick('seenThisLunch')}>
+            <div className="card-projects" onClick={() => handleClick('seenThisLunch')}>
               <img src={seenThisLunch} alt="webpage for restaurants" className='projects-image'/>
               <div className="projects-text">
                 <h2>Firebase project</h2>

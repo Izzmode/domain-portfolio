@@ -4,7 +4,7 @@
 }
 
 
-.ResumeUnicorn {
+.ResumeLightTheme {
   background-color: white;
   color: #333333;
 
@@ -42,13 +42,13 @@
 
 }
 
-.bottom-resume{
+.resume-content {
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
 
-.left-resume, .right-resume{
+.resume-education, .resume-experience {
   flex: 1;
 }
 
@@ -127,7 +127,7 @@
     font-size: .8rem;
   }
 
-  .left-resume, .right-resume{
+  .resume-education, .resume-experience {
     width: 100%;
   }
     

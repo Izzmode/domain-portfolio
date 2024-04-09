@@ -121,7 +121,7 @@
   transform: rotate(-45deg) translate(-9px, 9px);
 }
 
-.menu-open.NavbarUnicorn .menu-toggle .bar:nth-child(1) {
+.menu-open.NavbarLightTheme .menu-toggle .bar:nth-child(1) {
   transform: rotate(-45deg) translate(-7px, 8px);
   }
 
@@ -133,7 +133,7 @@
   transform: rotate(45deg) translate(-9px, -10px);
 }
 
-.NavbarUnicorn {
+.NavbarLightTheme {
   padding-top: 1.5rem;
   padding-bottom: 1.3rem;
   width: 100%;
@@ -221,7 +221,7 @@
     display: flex;
   }
 
-  .NavbarUnicorn {
+  .NavbarLightTheme {
   
     .ul-header {
       background-color: #fff;

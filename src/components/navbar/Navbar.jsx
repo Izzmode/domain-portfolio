@@ -50,7 +50,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <section className={`Navbar ${menuOpen ? 'menu-open' : ''} ${lightTheme ? 'NavbarUnicorn' : ''}`}>
+    <section className={`Navbar ${menuOpen ? 'menu-open' : ''} ${lightTheme ? 'NavbarLightTheme' : ''}`}>
       <header className='header-wrapper'>
         <div className='logo'>. io</div>
         <div className={`menu-toggle ${menuOpen ? 'open' : ''}`} onClick={handleToggleMenu}>

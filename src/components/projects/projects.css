@@ -78,7 +78,7 @@
 }
 
 
-.ProjectsUnicorn {
+.ProjectsLightTheme {
   background-color: white;
   color: #333;
 
@@ -152,7 +152,7 @@
     font-size: 3rem;
   }
 
-  .ProjectsUnicorn {
+  .ProjectsLightTheme {
     .projects-image {
       box-shadow: 10px 3px 7px rgb(102, 102, 102); 
     }
