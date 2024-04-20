@@ -22,7 +22,6 @@
     flex: 1;
     height: 320px;
     box-shadow: 7px 7px 15px rgb(28, 28, 28); 
-    box-shadow: 7px 7px 15px rgb(28, 28, 28); 
     transition: transform 0.3s ease, opacity 0.3s ease;
     cursor:default;
   }
@@ -134,27 +133,33 @@
 }
 
 @media screen and (max-width: 768px) {
-  .projects-wrapper-top, .projects-wrapper-bottom{
-    flex-direction: column;
-  }
 
-  .card-projects {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 100%;
-    height: auto;
-    box-shadow: none; 
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
+  .Projects {
 
-  .Projects .icon {
-    font-size: 3rem;
-  }
+    .projects-wrapper-top, .projects-wrapper-bottom {
+      flex-direction: column;
+    }
+  
+    .card-projects {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 100%;
+      height: auto;
+      box-shadow: none; 
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
 
+    .Projects .icon {
+      font-size: 3rem;
+    }
+  
+  }
   .ProjectsLightTheme {
     .projects-image {
-      box-shadow: 10px 3px 7px rgb(102, 102, 102); 
+      border-bottom: 1px solid lightgrey;
     }
+
   }
+
 }
