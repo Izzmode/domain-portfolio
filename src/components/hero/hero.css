@@ -215,8 +215,8 @@
       flex-direction: column;
     }
     
-    .avatar-image{
-      height: 350px;
+    .avatar-image {
+      height: 320px;
     }
 
     .hover-box {
@@ -224,7 +224,7 @@
       margin-top: -10rem;
     }
 
-    .icon{
+    .icon {
      font-size: 3rem;
     }
 
@@ -250,7 +250,7 @@
       border-radius: 8px;
 
       h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         color: white;
       }
     }

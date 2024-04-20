@@ -12,37 +12,37 @@
   }
 
   .card-contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  border-radius: 8px;
-  background: linear-gradient(to bottom, rgb(36, 36, 36), rgb(37, 37, 37));
-  min-width: 25rem;
-  height: 12.5rem;
-  margin-bottom: 1rem;
-  box-shadow: 7px 7px 15px rgb(28, 28, 28); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 8px;
+    background: linear-gradient(to bottom, rgb(36, 36, 36), rgb(37, 37, 37));
+    min-width: 25rem;
+    height: 12.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 7px 7px 15px rgb(28, 28, 28); 
   }
 
   .card-contact:hover {
-  opacity: .90;
+    opacity: .90;
   }
 
   .icon {
-  margin-right: 0rem;
-  margin-bottom: .8rem;
+    margin-right: 0rem;
+    margin-bottom: .8rem;
   }
 
   .card-contact h3 {
-  margin-bottom: .2rem;
+    margin-bottom: .2rem;
   }
 
   .computer-avatar {
-  min-width: 400px;
-  min-width: 25rem;
-  height: 26.5rem;
-  object-fit: contain;
+    min-width: 400px;
+    min-width: 25rem;
+    height: 26.5rem;
+    object-fit: contain;
   }
 
 }
@@ -86,24 +86,30 @@
 }
 
 @media screen and (max-width: 768px) {
-  .computer-avatar {
-    display: none;
+
+  .Contact {
+
+    .computer-avatar {
+      display: none;
+    }
+  
+    .card-contact {
+      width: 100%;
+      min-width: auto;
+      height: auto;
+      margin-bottom: 1.5rem;
+    }
+  
+    .card-contact-wrapper {
+      width: 100%
+    }
+    
+    .contact-wrapper {
+      gap: 0;
+      width: 100%;
+      min-width: auto;
+    }
+
   }
 
-  .card-contact {
-    width: 100%;
-    min-width: auto;
-    height: auto;
-    margin-bottom: 1.5rem;
-  }
-
-  .card-contact-wrapper {
-    width: 100%
-  }
-
-  .contact-wrapper {
-    gap: 0;
-    width: 100%;
-    min-width: auto;
-  }
 }
