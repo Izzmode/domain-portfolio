@@ -27,6 +27,11 @@ const ProjectModal = ({ setShowModal, project }) => {
               <a href={project.linkURL2} target="_blank" rel="noopener noreferrer">{project.linkLabel2}</a>
             </p>
             }
+            {project.linkURL3 &&
+            <p>
+              <a href={project.linkURL3} target="_blank" rel="noopener noreferrer">{project.linkLabel3}</a>
+            </p>
+            }
           </div>
           }
           <p className='project-text'>

@@ -56,7 +56,9 @@ const Projects = () => {
       linkURL: 'https://seenthis.co/sustainability/types-of-emissions-scope/',
       linkLabel: 'Types of scopes page',
       linkURL2: 'https://seenthis.co/sustainability/data-transfer-and-emissions/',
-      linkLabel2: 'Data transfer and emissions page'
+      linkLabel2: 'Data transfer and emissions page',
+      linkURL3: 'https://seenthis.co/sustainability/emissions-estimator/',
+      linkLabel3: 'Emissions Estimator'
     }
   }
 
