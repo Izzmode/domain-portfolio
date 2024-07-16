@@ -1,48 +1,49 @@
 .About{
   background: linear-gradient(to bottom, rgb(33, 33, 33), rgb(37, 37, 37));
+
+  .about-wrapper {
+    padding-bottom: 3rem;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  .image-container-about {
+    flex: 4;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .text-container-about {
+    flex: 5;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .text-container-about p{
+    margin-top: 1rem;
+  }
+
+  .about-me-image{
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .stricken{
+    text-decoration: line-through;
+    font-style: italic;
+  }
+
+  .icons-skills{
+    margin-top: 1rem;
+  }
+
 }
 
-.about-wrapper{
-  padding-bottom: 3rem;
-  display: flex;
-  gap: 3rem;
-  align-items: center;
-}
-
-.about-me-image{
-  width: 100%;
-  border-radius: 8px;
-  display: block;
-}
-
-.left-container-about {
-  flex: 4;
-  position: relative;
-  overflow: hidden;
-}
-
-.right-container-about{
-  flex: 5;
-  line-height: 1.5;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.right-container-about p{
-  margin-top: 1rem;
-}
-
-.stricken{
-  text-decoration: line-through;
-  font-style: italic;
-}
-
-.icons-skills{
-  margin-top: 1rem;
-}
-
-.AboutUnicorn {
+.AboutLightTheme {
   background: white;
   margin-top: -2rem;
   color: var(--secondary-color);
@@ -51,9 +52,10 @@
   .icon {
     color: var(--primary-pink-two)
   }
+
   .icon:hover {
     color: hsl(332, 99%, 65%);
-}
+  }
   
   .heading-about {
     font-size: 2.5rem;
@@ -66,30 +68,29 @@
       1.2px  1.2px 0 var(--primary-pink-two);
   }
 
-  .about-wrapper{
-    padding-top: 5rem;
-  }
 }
 
 @media screen and (max-width: 768px) {
-  .about-wrapper{
-    flex-direction: column;
-  }
-
-  .about-wrapper h2, .icons-skills {
-    text-align: center;
-  }
-
-  .icons-skills{
-    margin-top: 3rem;
-  }
-
-  .about-me-image{
-    width: 70%;
-    margin: 0 auto;
-  }
-
   .About{
     padding-top: 0rem;
+
+    .about-wrapper{
+      flex-direction: column;
+    }
+  
+    .about-wrapper h2, .icons-skills {
+      text-align: center;
+    }
+  
+    .icons-skills{
+      margin-top: 3rem;
+    }
+  
+    .about-me-image{
+      width: 70%;
+      margin: 0 auto;
+    }
+
   }
+
 }

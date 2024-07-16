@@ -1,18 +1,17 @@
 .Contact {
-    background-color: #282828;
-    padding-bottom: 2rem;
-}
+  background-color: #282828;
+  padding-bottom: 2rem;
 
-.contact-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
-    text-align: center;
-}
+  .contact-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+  }
 
-.card-contact {
+  .card-contact {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,85 +23,93 @@
     height: 12.5rem;
     margin-bottom: 1rem;
     box-shadow: 7px 7px 15px rgb(28, 28, 28); 
-}
+  }
 
-.card-contact:hover {
+  .card-contact:hover {
     opacity: .90;
-}
+  }
 
-.Contact .icon {
+  .icon {
     margin-right: 0rem;
     margin-bottom: .8rem;
-}
+  }
 
-.card-contact h3 {
+  .card-contact h3 {
     margin-bottom: .2rem;
-}
+  }
 
-.computer-avatar {
+  .computer-avatar {
     min-width: 400px;
     min-width: 25rem;
     height: 26.5rem;
     object-fit: contain;
+  }
+
 }
 
-.ContactUnicorn {
-    background-color: white;
+.ContactLightTheme {
+  background-color: white;
+  color: #333;
+
+  .heading-contact {
+    font-size: 2.5rem;
+    font-family: 'BartexFont', sans-serif;
+    color: white;
+    text-shadow: 
+    -1.2px -1.2px 0 var(--primary-pink-two),  
+    1.2px -1.2px 0 var(--primary-pink-two),
+    -1.2px  1.2px 0 var(--primary-pink-two),
+    1.2px  1.2px 0 var(--primary-pink-two);
+  }
+
+  .accent {
+    color: white;
+  }
+
+  .card-contact {
+    background: white;
+    border: 1px solid var(--primary-pink);
     color: #333;
+    box-shadow: 5px 5px 7px var(--fifth-pink);    
+  }
 
-    .heading-contact {
-        font-size: 2.5rem;
-        font-family: 'BartexFont', sans-serif;
-        color: white;
-        text-shadow: 
-        -1.2px -1.2px 0 var(--primary-pink-two),  
-        1.2px -1.2px 0 var(--primary-pink-two),
-       -1.2px  1.2px 0 var(--primary-pink-two),
-        1.2px  1.2px 0 var(--primary-pink-two);
-    }
+  .icon {
+    color: var(--primary-pink-two)
+  }
+  .icon:hover {
+    color: hsl(332, 99%, 65%);
+  }
 
-    .accent {
-        color: white;
-    }
-
-    .card-contact {
-        background: white;
-        border: 1px solid var(--primary-pink);
-        color: #333;
-        box-shadow: 5px 5px 7px var(--fifth-pink);    
-    }
-
-    .icon {
-        color: var(--primary-pink-two)
-    }
-    .icon:hover {
-        color: hsl(332, 99%, 65%);
-    }
-
-    .connect a {
-        color: #333;
-    }
+  .connect a {
+    color: #333;
+  }
 }
 
 @media screen and (max-width: 768px) {
+
+  .Contact {
+
     .computer-avatar {
-        display: none;
+      display: none;
     }
-
+  
     .card-contact {
-        width: 100%;
-        min-width: auto;
-        height: auto;
-        margin-bottom: 1.5rem;
+      width: 100%;
+      min-width: auto;
+      height: auto;
+      margin-bottom: 1.5rem;
     }
-
+  
     .card-contact-wrapper {
-        width: 100%
+      width: 100%
+    }
+    
+    .contact-wrapper {
+      gap: 0;
+      width: 100%;
+      min-width: auto;
     }
 
-    .contact-wrapper {
-        gap: 0;
-        width: 100%;
-        min-width: auto;
-    }
+  }
+
 }

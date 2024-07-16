@@ -12,15 +12,14 @@ const Hero = () => {
   const { lightTheme } = useContext(LightThemeContext)
 
   return (
-    <section className={`Hero ${lightTheme ? 'HeroUnicorn' : ''}`} id="home">
-      <div className='width-wrapper width-wrapper-hero'>
+    <section className={`Hero ${lightTheme ? 'HeroLightTheme' : ''}`} id="home">
+      <div className='width-wrapper'>
         <div className='hero-wrapper'>
-          <div className='hero-left'>
+          <div className='introduction-wrapper'>
             <div className='greeting-wrapper'>
               <h1 className='accent dark'>Hello</h1>
               <h1>, I'm <span className='accent-mobile'>Izabelle</span> .</h1>
-            </div>
-              
+            </div>   
             <h2>Front end developer</h2>
             <div className='based-text'>
               <p>Based in Stockholm</p>
@@ -38,7 +37,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className='avatar-image-container hero-right'>
+          <div className='avatar-image-container'>
             <img className="full-name" src={fullName} alt="Izabelle Olofsson" />
             <div className='barbie-description'>
               <p>She's a frontend developer</p>

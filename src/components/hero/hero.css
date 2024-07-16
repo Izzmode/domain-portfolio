@@ -1,107 +1,85 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
-
-.Hero{
+.Hero {
   padding-top: 2rem;
   background-color: #282828;
   position: relative;
+
+  .hero-wrapper {
+    padding-top: 9rem;
+    padding-bottom: 5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .introduction-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .avatar-image-container {
+    position: relative;
+  }
+
+  .greeting-wrapper {
+    display: flex;
+
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  .based-text {
+    display: flex;
+    align-items: center;
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 5px; 
+    }
+  }
+
+  .icon-wrapper {
+    margin-top: 4rem;
+  }
+
+  .avatar-image {
+    height: 450px;
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    filter: saturate(60%) brightness(110%);
+  }
+
+  .hover-box {
+    position: absolute;
+    margin-left: 5.5rem;
+    background-color: rgba(36, 36, 36, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .avatar-image-container:hover .hover-box {
+    opacity: 1;
+  }
+
+  .barbie-description, .barbie-box {
+    display: none;
+  }
+
+  .full-name {
+    display: none;
+  }
+
 }
 
-.barbie-description, .barbie-box {
-  display: none;
-}
-
-.full-name {
-  display: none;
-}
-
-.hero-wrapper{
-  padding-top: 9rem;
-  padding-bottom: 5rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 3rem;
-  align-items: center;
-}
-
-.greeting-wrapper{
-  display: flex;
-}
-
-.greeting-wrapper h1{
-  font-size: 3rem;
-}
-
-.hero-left{
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.hero-right {
-  position: relative;
-}
-
-.based-text{
-  display: flex;
-  align-items: center;
-}
-
-.based-text span {
-  display: inline-flex;
-  align-items: center;
-  margin-left: 5px; 
-}
-
-.portfolio-image-container{
-  position: relative;
-}
-
-.avatar-image{
-  height: 450px;
-  border-radius: 50%;
-  display: block;
-  position: relative;
-  overflow: hidden;
-  filter: saturate(60%) brightness(110%);
-}
-
-.hover-box {
-  position: absolute;
-  margin-left: 5.5rem;
-  background-color: rgba(36, 36, 36, 0.7);
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.avatar-image-container:hover .hover-box {
-  opacity: 1;
-}
-
-.portfolio-image-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  background: 
-      linear-gradient(to top, rgba(40, 40, 40, 0), rgba(40, 40, 40, 0.8)),
-      linear-gradient(to right, rgba(40, 40, 40, 0), rgba(40, 40, 40, 0.8)),
-      linear-gradient(to bottom, rgba(40, 40, 40, 0), rgba(40, 40, 40, 0.8)),
-      linear-gradient(to left, rgba(40, 40, 40, 0), rgba(40, 40, 40, 0.8)); 
-  background-size: 100% 20%, 20% 100%, 100% 20%, 20% 100%; 
-  background-position: top, right, bottom, left;
-  background-repeat: no-repeat;
-  transition: background 0.3s ease;
-  content: '';
-} 
-
-.HeroUnicorn {
+.HeroLightTheme {
   background-color: #fff;
   color: var(--secondary-color);
   width: 100%;
@@ -187,20 +165,20 @@
   .hover-box {
     background-color: hsla(332, 81%, 60%, 0.4);
   }
-}
 
-.HeroUnicorn .shimmer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  animation: left 1s linear forwards, disappear 1s linear forwards 0.5s;
-  background: linear-gradient(100deg,
-    rgba(255, 255, 255, 0) 20%,
-    rgb(254, 52, 146, 0.5) 50%,
-    rgba(255, 255, 255, 0) 80%
-  );
+  .shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    animation: left 1s linear forwards, disappear 1s linear forwards 0.5s;
+    background: linear-gradient(100deg,
+      rgba(255, 255, 255, 0) 20%,
+      rgb(254, 52, 146, 0.5) 50%,
+      rgba(255, 255, 255, 0) 80%
+    );
+  }
 }
 
 @keyframes left {
@@ -230,73 +208,69 @@
 }
 
 @media screen and (max-width: 768px) {
-  .hero-wrapper{
-    padding-bottom: 5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 3rem;
-    align-items: center;
+
+  .Hero{
+    
+    .hero-wrapper{
+      flex-direction: column;
+    }
+    
+    .avatar-image {
+      height: 320px;
+    }
+
+    .hover-box {
+      margin-left: 3rem;
+      margin-top: -10rem;
+    }
+
+    .icon {
+     font-size: 3rem;
+    }
+
+    .introduction-wrapper {
+      align-items: center;
+    }
+ 
+    .based-text, .introduction-wrapper h2 {
+      display: none;
+    }
+
+    .hero-wrapper {
+      padding-top: 4rem;
+    }
+ 
+    .greeting-wrapper {
+      margin-top: -10rem;
+      z-index: 1;
+    }
+ 
+    .greeting-wrapper {
+      background-color: #1c1c1c71;
+      border-radius: 8px;
+
+      h1 {
+        font-size: 1.8rem;
+        color: white;
+      }
+    }
+
+   h1.dark {
+     color: #f8f8f8;
+   }
+ 
+   .avatar-image-container {
+     order: -1; 
+   }
+
+   .rainbow-icon-wrapper {
+     width: 37px;
+     margin: 0 auto;
+   }
+
   }
 
-  .avatar-image{
-    height: 350px;
-  }
-
-  .hover-box {
-    margin-left: 3rem;
-    margin-top: -10rem;
-  }
-
-  .icon-wrapper{
-    margin-top: 4rem;
-  }
-
-  .Hero .icon{
-    font-size: 3rem;
-  }
-
-  .hero-left{
-    align-items: center;
-  }
-
-  .based-text, .hero-left h2{
-    display: none;
-  }
-  
-  .hero-wrapper {
-    padding-top: 4rem;
-  }
-
-  .greeting-wrapper{
-    margin-top: -10rem;
-    z-index: 1;
-  }
-
-  .greeting-wrapper h1{
-      font-size: 2rem;
-      color: white;
-  }
-
-  .greeting-wrapper{
-    background-color: #1c1c1c71;
-    border-radius: 8px;
-  }
-
-  h1.dark{
-    color: #f8f8f8;
-  }
-
-  .avatar-image-container {
-    order: -1; 
-  }
-
-  .rainbow-icon-wrapper {
-    width: 37px;
-    margin: 0 auto;
-  }
-
-  .HeroUnicorn {
+  .HeroLightTheme {
     margin-top: 0;
         
     .hero-wrapper {
@@ -340,7 +314,7 @@
       color: white;
     }
 
-    .hero-right {
+    .avatar-image-container {
       margin-top: 2rem;
     }
   } 
