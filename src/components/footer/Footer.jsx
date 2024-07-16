@@ -1,5 +1,5 @@
 import { FaArrowAltCircleUp } from "react-icons/fa";
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { LightThemeContext } from '../../context/LightThemeContext';
 import './footer.css'
 
@@ -13,6 +13,7 @@ const footer = () => {
       behavior: 'smooth',
     });
   };
+
   return (
     <div className={`Footer ${lightTheme ? 'FooterUnicorn' : ''}`}>
       <div className='width-wrapper width-wrapper-footer'>

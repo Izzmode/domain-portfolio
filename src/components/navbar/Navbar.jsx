@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { PiRainbowCloudBold, PiCloudMoon } from "react-icons/pi";
 import { LightThemeContext } from '../../context/LightThemeContext';
 import './navbar.css';
@@ -50,8 +50,7 @@ const Navbar = () => {
   }, []);
 
   return (
-<section className={`Navbar ${menuOpen ? 'menu-open' : ''} ${lightTheme ? 'NavbarUnicorn' : ''}`}>
-
+    <section className={`Navbar ${menuOpen ? 'menu-open' : ''} ${lightTheme ? 'NavbarUnicorn' : ''}`}>
       <header className='header-wrapper'>
         <div className='logo'>. io</div>
         <div className={`menu-toggle ${menuOpen ? 'open' : ''}`} onClick={handleToggleMenu}>
