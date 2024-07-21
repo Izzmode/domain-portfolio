@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { FaHtml5, FaCss3Alt, FaReact, FaVuejs, FaSass, FaNodeJs } from "react-icons/fa";
-import { TbBrandJavascript } from "react-icons/tb";
+import { TbBrandJavascript, TbBrandTypescript } from "react-icons/tb";
 import { LightThemeContext } from '../../context/LightThemeContext';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -27,7 +27,7 @@ const About = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: inView ? 1 : 0 }}
               transition={{ duration: 1 }}
-              className="heading-about"
+              className="sub-title"
               ref={ref}
               >
               Who am I?
@@ -40,22 +40,48 @@ const About = () => {
                 <br /> 
                 <br /> 
 
-                During my time in school, I worked mostly with React and REST APIs to create different projects. 
-                Now, during my internship, I am delving into Vue and GraphQL which is both challenging and exciting. I am learning the 
-                importance of reusable code and how to always think one step ahead when creating something.
+                During my time in school, I worked mostly with React and REST APIs to create different projects, whilst 
+                at my internship, I delved into Vue and GraphQL, which were both challenging and exciting. 
+                It was during my internship that I learned the importance of reusable code and how to always think one step ahead 
+                when creating something.
                 <br />
                 <br />
                 My goal is to actively seek out new knowledge and skills, while working in collaborative teams that value teamwork and intellectual curiosity.
               </p>
             </div>
             <div className='icons-skills'>
-              <FaHtml5 className='icon'/>
-              <FaCss3Alt className='icon icon-margin'/>
-              <FaSass className='icon icon-margin'/>
-              <TbBrandJavascript className='icon icon-margin'/>
-              <FaNodeJs className='icon icon-margin'/>
-              <FaReact className='icon icon-margin'/>
-              <FaVuejs className='icon icon-margin'/>
+              <div className='icon-wrapper'>
+                <FaHtml5 className='icon'/>
+                <p className='icon-text'>HTML</p>
+              </div>
+              <div className='icon-wrapper'>
+                <FaCss3Alt className='icon'/>
+                <p className='icon-text'>CSS</p>
+              </div>
+              <div className='icon-wrapper'>
+                <FaSass className='icon'/>
+                <p className='icon-text'>Sass</p>
+              </div>
+              <div className='icon-wrapper'>
+              <TbBrandJavascript className='icon'/>
+                <p className='icon-text'>JavaScript</p>
+              </div>
+              <div className='icon-wrapper'>
+              <TbBrandTypescript className='icon'/>
+                <p className='icon-text'>TypeScript</p>
+              </div>
+              <div className='icon-wrapper'>
+              <FaNodeJs className='icon'/>
+                <p className='icon-text'>NodeJS</p>
+              </div>
+              <div className='icon-wrapper'>
+                <FaVuejs className='icon'/>
+                <p className='icon-text'>Vue</p>
+              </div>
+              <div className='icon-wrapper'>
+                <FaReact className='icon'/>
+                <p className='icon-text'>React</p>
+              </div>
             </div>
           </div>
         </div>

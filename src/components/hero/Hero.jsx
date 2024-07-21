@@ -28,7 +28,7 @@ const Hero = () => {
               <h1 className='accent dark'>Hello</h1></motion.div>
               <h1>, I'm <span className='accent-mobile'>Izabelle</span> .</h1>
             </div>   
-            <h2>Front end developer</h2>
+            <h2 className='sub-title'>Front end developer</h2>
             <div className='based-text'>
               <p>Based in Stockholm</p>
               <span>

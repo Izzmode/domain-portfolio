@@ -168,8 +168,11 @@
 }
 
 @media screen and (max-width: 1255px) {
-  .greeting-wrapper h1{
-    font-size: 2rem;
+  .Hero {
+
+    .greeting-wrapper h1{
+      font-size: 2rem;
+    }
   }
 }
 

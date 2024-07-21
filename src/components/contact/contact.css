@@ -11,15 +11,6 @@
     text-align: center;
   }
 
-  /* .title-wrapper {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    h2 {
-      font-size: 2rem;
-    }
-  } */
-
   .card-contact {
     display: flex;
     flex-direction: column;

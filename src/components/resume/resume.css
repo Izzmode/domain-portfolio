@@ -1,17 +1,6 @@
 .Resume {
   flex-direction: column;
   background-color: #282828;
-
-  .title-wrapper {
-    display: flex;
-    gap: .5rem;
-    justify-content: center;
-    font-size: 2rem;
-  
-    h2 {
-      font-size: 2rem;
-    }
-  }
 }
 
 
