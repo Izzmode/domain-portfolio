@@ -44,7 +44,9 @@
 
   .icons-skills {
     display: flex;
-    gap: 1rem;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+    row-gap: 1.5rem;
     margin-top: 1.5rem;
   }
 
@@ -122,6 +124,15 @@
       width: 70%;
       margin: 0 auto;
     }
+
+  }
+
+}
+@media screen and (max-width: 400px) {
+  .About{
+  .about-wrapper {
+    align-items:normal ;
+  }
 
   }
 

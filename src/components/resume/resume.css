@@ -1,6 +1,77 @@
 .Resume {
   flex-direction: column;
   background-color: #282828;
+
+  .resume-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .resume-education, .resume-experience {
+    flex: 1;
+  }
+  
+  .card-education{
+    border-top: 1px solid var(--accent-color);
+    padding: 1rem;
+    padding-inline: 3rem;
+    /* margin-top: 1rem; */
+    padding-bottom: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 130px;
+  }
+  
+  .card-education:first-of-type {
+    margin-top: 1rem;
+  }
+  .card-education:hover {
+    background-color: hsl(0, 0%, 16.1%); 
+  }
+  
+  .card-education h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .card-education h3 {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  
+  .card-education p {
+    font-size: .9rem;
+    font-weight: 300;
+    margin-top: .5rem;
+  }
+  
+  .students-avatar {
+    width: 300px;
+    color: #fff;
+    background-position: center center;
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .title-wrapper-card {
+    display: flex;
+    gap: .5rem;
+    align-items: baseline;
+  }
+  
+  .icon.icon-briefcase{
+    font-size: 1.7rem;
+  }
+  
+  .icon{
+    margin-left: 1rem;
+  }
+
+  .card-content{
+    margin-left: 1.5rem;
+  }
 }
 
 
@@ -44,77 +115,13 @@
 
 
 
-.resume-content {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
 
-.resume-education, .resume-experience {
-  flex: 1;
-}
-
-.card-education{
-  border-top: 1px solid var(--accent-color);
-  padding: 1rem;
-  padding-inline: 3rem;
-  /* margin-top: 1rem; */
-  padding-bottom: 1rem;
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 130px;
-}
-
-.card-education:first-of-type {
-  margin-top: 1rem;
-}
-.card-education:hover{
-  background-color: hsl(0, 0%, 16.1%); 
-}
-
-.card-education h2{
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-
-.card-education h3{
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-.card-education p{
-  font-size: .9rem;
-  font-weight: 300;
-  margin-top: .5rem;
-}
-
-.students-avatar{
-  width: 300px;
-  color: #fff;
-  background-position: center center;
-  height: 250px;
-  object-fit: cover;
-}
-
-.title-wrapper-card{
-  display: flex;
-  gap: .5rem;
-  align-items: baseline;
-}
-
-.icon.icon-briefcase{
-  font-size: 1.7rem;
-}
-
-.Resume .icon{
-  margin-left: 1rem;
-}
-.card-content{
-  margin-left: 1.5rem;
-}
 
 @media screen and (max-width: 768px) {
+
+  .Resume {
+
+  
   .card-education h2{
     font-size: 1rem;
   }
@@ -141,5 +148,20 @@
 
   .card-education{
     min-height: 150px; 
+  }
+}
+}
+@media screen and (max-width: 400px) {
+  .Resume {
+    .title-wrapper {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      /* margin-bottom: 2rem; */
+
+      .title {
+        margin-bottom: 0;
+      }
+    }
   }
 }

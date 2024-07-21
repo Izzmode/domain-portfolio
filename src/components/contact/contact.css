@@ -117,3 +117,14 @@
   }
 
 }
+@media screen and (max-width: 400px) {
+
+  .Contact {
+
+  .title-wrapper {
+    gap: .4rem;
+  }
+
+  }
+
+}
