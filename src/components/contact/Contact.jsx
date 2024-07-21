@@ -1,17 +1,32 @@
 import { useContext } from 'react';
 import { FaEnvelope, FaLinkedin } from "react-icons/fa";
 import { LightThemeContext } from '../../context/LightThemeContext';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import computerAvatar from '../../assets/working.png'
 import './contact.css'
 
 const Contact = () => {
 
   const { lightTheme } = useContext(LightThemeContext)
+  const { ref, inView } = useInView();
 
   return (
     <section className={`Contact ${lightTheme ? 'ContactLightTheme' : ''}`} id="contact">
       <div className='padding-wrapper width-wrapper'>
-        <h2 className='title heading-contact'>Let's get in <span className='accent'>touch</span>!</h2>
+        <div className="title-wrapper heading-contact" ref={ref}>
+          <h2>Let's Get In </h2>
+          <motion.h2
+          initial={{ y: + 500 }}
+          animate={{ y: inView ? 0 : + 500 }}
+          transition={{ duration: 1.2 }}
+          className="accent title"
+          >
+          Touch
+          </motion.h2>
+          <h2>!</h2>
+        </div>
+        {/* <h2 className='title heading-contact'>Let's get in <span className='accent'>touch</span>!</h2> */}
         <div className="contact-wrapper">
           <div className='card-contact-wrapper'>
             <div className='card-contact'>

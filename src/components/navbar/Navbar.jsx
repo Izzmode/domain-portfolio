@@ -1,6 +1,8 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { PiRainbowCloudBold, PiCloudMoon } from "react-icons/pi";
 import { LightThemeContext } from '../../context/LightThemeContext';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import './navbar.css';
 
 const Navbar = () => {
@@ -8,6 +10,7 @@ const Navbar = () => {
   const { lightTheme, toggleLightTheme } = useContext(LightThemeContext)
   const [activeLink, setActiveLink] = useState('home'); 
   const [menuOpen, setMenuOpen] = useState(false);
+  const { ref, inView } = useInView();
 
   const handleLinkClick = (link) => {
     setActiveLink(link);
@@ -47,6 +50,27 @@ const Navbar = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
+  }, []);
+
+  const shimmerRef = useRef(null);
+
+  useEffect(() => {
+    const shimmerElement = shimmerRef.current;
+
+    const handleAnimationEnd = (event) => {
+      if (event.animationName === 'disappear') {
+        shimmerElement.style.display = 'none';
+      }
+    };
+    if(shimmerElement) {
+
+      shimmerElement.addEventListener('animationend', handleAnimationEnd);
+  
+      return () => {
+        shimmerElement.removeEventListener('animationend', handleAnimationEnd);
+      };
+    }
+
   }, []);
 
   return (
@@ -98,6 +122,7 @@ const Navbar = () => {
           </li>
         </ul>
       </header>
+      <div className='shimmer' ref={ref}></div>
     </section>
   );
 };

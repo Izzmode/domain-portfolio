@@ -3,13 +3,22 @@
   padding-bottom: 2rem;
 
   .contact-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
   }
+
+  /* .title-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    h2 {
+      font-size: 2rem;
+    }
+  } */
 
   .card-contact {
     display: flex;
@@ -60,6 +69,10 @@
     1.2px -1.2px 0 var(--primary-pink-two),
     -1.2px  1.2px 0 var(--primary-pink-two),
     1.2px  1.2px 0 var(--primary-pink-two);
+
+    /* .title {
+      font-size: 2.5rem;
+    } */
   }
 
   .accent {

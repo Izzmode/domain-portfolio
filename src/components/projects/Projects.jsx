@@ -1,5 +1,7 @@
 import { useState, useContext } from "react";
 import { FaGithub } from "react-icons/fa";
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import techspace from '../../assets/thumbnail_techspace_closer.jpg'
 import typescriptProject from '../../assets/thumbnail_typescript.jpg'
 import seenThisWeb from '../../assets/thumbnail_website.png'
@@ -24,6 +26,7 @@ import './projects.css'
 const Projects = () => {
 
   const { lightTheme } = useContext(LightThemeContext)
+  const { ref, inView } = useInView();
   
   const [showModal, setShowModal] = useState(false)
   const [projectForModal, setProjectForModal] = useState(null)
@@ -77,7 +80,17 @@ const Projects = () => {
     <section className={`Projects ${lightTheme ? 'ProjectsLightTheme' : ''}`} id="projects">
       { showModal && <ProjectModal setShowModal={setShowModal} project={projectForModal}/>}
       <div className='padding-wrapper width-wrapper'>
-        <h2 className='title heading-projects'>Recent <span className='accent'>projects</span></h2>
+        <div className="heading-projects title-wrapper" ref={ref}>
+        <h2 className="title">Recent</h2>
+        <motion.h2
+        initial={{ x: + 500 }}
+        animate={{ x: inView ? 0 : + 500 }}
+        transition={{ duration: 1.5 }}
+        className="accent title"
+        >
+        Projects
+        </motion.h2>
+        </div>
         <div className="projects-wrapper">
           <div className="projects-wrapper-top">
             <div className="card-projects" onClick={() => handleClick('techSpace')}>

@@ -1,16 +1,37 @@
 import { FaGraduationCap, FaBriefcase } from "react-icons/fa";
 import { useContext } from 'react';
 import { LightThemeContext } from '../../context/LightThemeContext';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import './resume.css'
 
 const Resume = () => {
 
   const { lightTheme } = useContext(LightThemeContext)
+  const { ref, inView } = useInView();
 
   return (
     <section className={`Resume ${lightTheme ? 'ResumeLightTheme' : ''}`} id="resume">
       <div className='padding-wrapper width-wrapper'>
-        <h2 className='title heading-resume'>Experience <span className='accent'>&</span> Education</h2>
+        <div className="title-wrapper" ref={ref}>
+        <motion.h2
+        initial={{ x: - 500 }}
+        animate={{ x: inView ? 0 : - 500 }}
+        transition={{ duration: 1.5 }}
+        className="title"
+        >
+        Experience
+        </motion.h2>
+        <h2 className="accent">&</h2>
+        <motion.h2
+        initial={{ x: + 500 }}
+        animate={{ x: inView ? 0 : + 500 }}
+        transition={{ duration: 1.5 }}
+        className="title"
+        >
+        Education
+        </motion.h2>
+        </div>
         <div className='resume-content'>
           <div className='resume-experience'>
             <h3>Experience</h3>

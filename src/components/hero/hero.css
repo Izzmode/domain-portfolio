@@ -165,40 +165,6 @@
   .hover-box {
     background-color: hsla(332, 81%, 60%, 0.4);
   }
-
-  .shimmer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    animation: left 1s linear forwards, disappear 1s linear forwards 0.5s;
-    background: linear-gradient(100deg,
-      rgba(255, 255, 255, 0) 20%,
-      rgb(254, 52, 146, 0.5) 50%,
-      rgba(255, 255, 255, 0) 80%
-    );
-  }
-}
-
-@keyframes left {
-  0% {
-    left: -40%;
-    opacity: 0;
-  }
-  100% {
-    left: 50%;
-    opacity: 1;
-  }
-}
-@keyframes disappear {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    display: none;
-  }
 }
 
 @media screen and (max-width: 1255px) {
@@ -275,10 +241,6 @@
         
     .hero-wrapper {
       padding-top: 4rem;
-    }
-
-    .shimmer {
-      display: none;
     }
 
     .hover-box {

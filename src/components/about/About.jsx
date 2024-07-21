@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { FaHtml5, FaCss3Alt, FaReact, FaVuejs, FaSass, FaNodeJs } from "react-icons/fa";
 import { TbBrandJavascript } from "react-icons/tb";
 import { LightThemeContext } from '../../context/LightThemeContext';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import portfolioImage from '../../assets/img_two.jpg'
 import portfolioImageColor from '../../assets/color.jpg'
 import './about.css'
@@ -9,6 +11,8 @@ import './about.css'
 const About = () => {
     
   const { lightTheme } = useContext(LightThemeContext)
+  const { ref, inView } = useInView();
+
 
   return (
     <section className={`About ${lightTheme ? 'AboutLightTheme' : ''}`} id="about">
@@ -19,7 +23,15 @@ const About = () => {
           </div>
           <div className="text-container-about">
             <div className='about-text'>
-              <h2 className='heading-about'>Who am I?</h2>
+              <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: inView ? 1 : 0 }}
+              transition={{ duration: 1 }}
+              className="heading-about"
+              ref={ref}
+              >
+              Who am I?
+              </motion.h2>
               <p>
                 I am a waitress turned preschool-teacher, turned salesperson, and eventually found my passion in development. 
                 I absolutely love to learn new things and strive to be better than I am today. 

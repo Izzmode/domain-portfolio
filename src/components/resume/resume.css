@@ -1,6 +1,17 @@
 .Resume {
   flex-direction: column;
   background-color: #282828;
+
+  .title-wrapper {
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+    font-size: 2rem;
+  
+    h2 {
+      font-size: 2rem;
+    }
+  }
 }
 
 
@@ -42,6 +53,8 @@
 
 }
 
+
+
 .resume-content {
   display: flex;
   flex-direction: column;
@@ -51,7 +64,6 @@
 .resume-education, .resume-experience {
   flex: 1;
 }
-
 
 .card-education{
   border-top: 1px solid var(--accent-color);
@@ -87,7 +99,6 @@
   font-weight: 300;
   margin-top: .5rem;
 }
-
 
 .students-avatar{
   width: 300px;

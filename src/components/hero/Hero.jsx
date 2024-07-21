@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { CiLocationOn } from "react-icons/ci";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { LightThemeContext } from '../../context/LightThemeContext';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import aboutImage from '../../assets/avatar_9.png'
 import fullName from '../../assets/full_name.png'
 import aboutImageUnicorn from '../../assets/unicorn_avatar_3.png'
@@ -9,6 +11,7 @@ import './hero.css'
 
 const Hero = () => {
 
+  const { ref, inView } = useInView();
   const { lightTheme } = useContext(LightThemeContext)
 
   return (
@@ -16,8 +19,13 @@ const Hero = () => {
       <div className='width-wrapper'>
         <div className='hero-wrapper'>
           <div className='introduction-wrapper'>
-            <div className='greeting-wrapper'>
-              <h1 className='accent dark'>Hello</h1>
+            <div ref={ref} className='greeting-wrapper'>
+              <motion.div
+              initial={{ x: -500 }}
+              animate={{ x: inView ? 0 : -500 }}
+              transition={{ duration: 1.2 }}
+              > 
+              <h1 className='accent dark'>Hello</h1></motion.div>
               <h1>, I'm <span className='accent-mobile'>Izabelle</span> .</h1>
             </div>   
             <h2>Front end developer</h2>
@@ -56,7 +64,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className='shimmer'></div>
     </section>
   )
 }

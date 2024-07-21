@@ -2,6 +2,12 @@
   background-color: #282828;
   position: relative;
 
+  /* .heading-projects {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  } */
+
   .gh-icon {
     text-align: center;
     margin-top: 2rem;

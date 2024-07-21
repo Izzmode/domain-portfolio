@@ -8,6 +8,12 @@
     align-items: center;
   }
   
+  .title-wrapper-hej {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
   .image-container-about {
     flex: 4;
     position: relative;
@@ -58,7 +64,7 @@
   }
   
   .heading-about {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-family: 'BartexFont', sans-serif;
     color: white;
     text-shadow: 
