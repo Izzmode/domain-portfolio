@@ -121,10 +121,14 @@
 
   .Contact {
 
-  .title-wrapper {
-    gap: .4rem;
+    .title-wrapper {
+      gap: .4rem;
+    }
   }
-
+  .ContactLightTheme {
+    .title-wrapper {
+      font-size: 2rem;
+    }
   }
 
 }

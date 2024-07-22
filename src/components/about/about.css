@@ -130,10 +130,15 @@
 }
 @media screen and (max-width: 400px) {
   .About{
-  .about-wrapper {
-    align-items:normal ;
+    .about-wrapper {
+      align-items:normal ;
+    }
   }
 
+  .AboutLightTheme {
+    .about-wrapper {
+      padding-top: 2rem;
+    }
   }
 
 }

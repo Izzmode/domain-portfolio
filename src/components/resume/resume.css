@@ -79,7 +79,7 @@
   background-color: white;
   color: #333333;
 
-  .card-education{
+  .card-education {
     border-top: 1px solid var(--primary-pink);
   }
 
@@ -91,7 +91,7 @@
     color: var(--primary-pink-two)
   }
 
-  .heading-resume {
+  .title-wrapper {
     font-size: 2.5rem;
     font-family: 'BartexFont', sans-serif;
     color: white;
@@ -108,7 +108,11 @@
     -1.2px -1.2px 0 var(--primary-pink-two),  
       1.2px -1.2px 0 var(--primary-pink-two),
     -1.2px  1.2px 0 var(--primary-pink-two),
-      1.2px  1.2px 0 var(--primary-pink-two);
+      1.2px  1.2px 0 var(--primary-pink-two),
+      0 0 3px var(--primary-pink-two),
+      0 0 5px var(--primary-pink-two),
+      0 0 7px var(--primary-pink-two),
+      0 0 10px var(--primary-pink-two);
   }
 
 }
@@ -120,36 +124,32 @@
 @media screen and (max-width: 768px) {
 
   .Resume {
-
   
-  .card-education h2{
-    font-size: 1rem;
-  }
+    .card-education h2 {
+      font-size: 1rem;
+    }
   
-  .card-education h3{
-    font-size: .9rem;
-  }
-    
-  .card-education p{
-    font-size: .8rem;
-  }
+    .card-education h3 {
+      font-size: .9rem;
+    }
+      
+    .card-education p {
+      font-size: .8rem;
+    }
 
-  .resume-education, .resume-experience {
-    width: 100%;
-  }
-    
-  .card-education{
-    padding-inline: 0rem;
-  }
+    .resume-education, .resume-experience {
+      width: 100%;
+    }
+      
+    .card-education {
+      padding-inline: 0rem;
+      min-height: 150px; 
+    }
 
-  .card-education::before {
-    content: none;
+    .card-education::before {
+      content: none;
+    }
   }
-
-  .card-education{
-    min-height: 150px; 
-  }
-}
 }
 @media screen and (max-width: 400px) {
   .Resume {
@@ -162,6 +162,12 @@
       .title {
         margin-bottom: 0;
       }
+    }
+  }
+
+  .ResumeLightTheme {
+    .title-wrapper {
+      font-size: 2rem;
     }
   }
 }

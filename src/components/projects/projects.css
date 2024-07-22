@@ -137,6 +137,13 @@
     display: none;
   }
 }
+@media screen and (max-width: 400px) {
+  .ProjectsLightTheme {
+    .title-wrapper {
+      font-size: 2rem;
+    }
+  }
+}
 
 @media screen and (max-width: 768px) {
 

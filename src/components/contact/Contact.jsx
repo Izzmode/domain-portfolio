@@ -17,8 +17,8 @@ const Contact = () => {
         <div className="title-wrapper heading-contact" ref={ref}>
           <h2>Let's Get In </h2>
           <motion.h2
-          initial={{ y: + 500 }}
-          animate={{ y: inView ? 0 : + 500 }}
+          initial={{ x: + 500 }}
+          animate={{ x: inView ? 0 : + 500 }}
           transition={{ duration: 1.2 }}
           className="accent title"
           >
