@@ -109,10 +109,10 @@
       1.2px -1.2px 0 var(--primary-pink-two),
     -1.2px  1.2px 0 var(--primary-pink-two),
       1.2px  1.2px 0 var(--primary-pink-two),
-      0 0 3px var(--primary-pink-two),
+      /* 0 0 3px var(--primary-pink-two),
       0 0 5px var(--primary-pink-two),
       0 0 7px var(--primary-pink-two),
-      0 0 10px var(--primary-pink-two);
+      0 0 10px var(--primary-pink-two); */
   }
 
 }
