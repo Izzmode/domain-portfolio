@@ -3,7 +3,7 @@
 .Navbar{
   padding-top: 1.5rem;
   padding-bottom: 1.3rem;
-  width: 100%;
+  width: 100vw;
   position: fixed;
   z-index: 2;
   background-color: #282828;
@@ -88,18 +88,9 @@
     flex-direction: column;
     cursor: pointer;
   }
-
-
-  
 }
 
-
 .NavbarLightTheme {
-  padding-top: 1.5rem;
-  padding-bottom: 1.3rem;
-  width: 100%;
-  position: fixed;
-  z-index: 2;
   color: black;
   background-color: transparent;
   top: 0;
