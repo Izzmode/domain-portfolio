@@ -37,6 +37,7 @@ body {
 html {
   scroll-behavior: smooth;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .width-wrapper {
@@ -139,7 +140,7 @@ h2 {
 }
 
 .sub-title {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 }
 
 

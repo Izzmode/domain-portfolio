@@ -22,24 +22,24 @@
     justify-content: space-between;
   }
 
-  .text-container-about p{
+  .text-container-about p {
     margin-top: 1rem;
   }
 
-  .about-me-image{
+  .about-me-image {
     width: 100%;
     border-radius: 8px;
     display: block;
   }
 
-  .stricken{
+  .stricken {
     text-decoration: line-through;
     font-style: italic;
   }
 
   .sub-title {
     display: inline-block;
-    border-bottom: 1px solid hsl(332, 35%, 55%);;
+    border-bottom: 1px solid hsl(332, 35%, 55%);
   }
 
   .icons-skills {
@@ -55,7 +55,7 @@
 
     .icon-text {
       position: absolute;
-      bottom: -1.6rem;
+      bottom: -1.4rem;
       left: 50%;
       transform: translateX(-50%);
       background-color: rgb(37, 37, 37);
@@ -91,10 +91,29 @@
   .icon:hover {
     color: hsl(332, 99%, 65%);
   }
+
+  .icon-wrapper {
+
+    .icon-text {
+      background-color: white;
+      border: 1px solid var(--primary-pink-two);
+      padding: .1rem .3rem;
+      border-radius: .2rem;
+      color: var(--primary-pink-two);
+      opacity: .8;
+    }
+
+    &:hover {
+      .icon-text {
+        display: block;
+      }
+    }
+  }
   
   .sub-title {
     font-family: 'BartexFont', sans-serif;
     color: white;
+    border-bottom: none;
     text-shadow: 
     -1.2px -1.2px 0 var(--primary-pink-two),  
       1.2px -1.2px 0 var(--primary-pink-two),
