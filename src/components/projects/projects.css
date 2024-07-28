@@ -16,8 +16,8 @@
   .projects-image {
     width: 100%;
     height: 100%;
-    border-radius: 8px;
-    overflow: hidden;
+    /* border-radius: 8px; */
+    /* overflow: hidden; */
     object-fit: cover;
   }
     
@@ -25,11 +25,11 @@
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    flex: 1;
     height: 320px;
     box-shadow: 7px 7px 15px rgb(28, 28, 28); 
     transition: transform 0.3s ease, opacity 0.3s ease;
-    cursor:default;
+    cursor: default;
+    flex: 1;
   }
 
   .card-projects:hover{
@@ -152,27 +152,13 @@
     .projects-wrapper-top, .projects-wrapper-bottom {
       flex-direction: column;
     }
-  
-    .card-projects {
-      position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      width: 100%;
-      height: auto;
-      box-shadow: none; 
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
 
-    .Projects .icon {
+    .icon {
       font-size: 3rem;
     }
-  
-  }
-  .ProjectsLightTheme {
-    .projects-image {
-      border-bottom: 1px solid lightgrey;
+
+    .card-projects {
+      flex: none;
     }
-
   }
-
 }

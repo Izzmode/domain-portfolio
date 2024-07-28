@@ -81,15 +81,15 @@ const Projects = () => {
       { showModal && <ProjectModal setShowModal={setShowModal} project={projectForModal}/>}
       <div className='padding-wrapper width-wrapper'>
         <div className="heading-projects title-wrapper" ref={ref}>
-        <h2 className="title">Recent</h2>
-        <motion.h2
-        initial={{ x: + 500 }}
-        animate={{ x: inView ? 0 : + 500 }}
-        transition={{ duration: 1.5 }}
-        className="accent title"
-        >
-        Projects
-        </motion.h2>
+          <h2 className="title">Recent</h2>
+          <motion.h2
+          initial={{ x: + 500 }}
+          animate={{ x: inView ? 0 : + 500 }}
+          transition={{ duration: 1.5 }}
+          className="accent title"
+          >
+          Projects
+          </motion.h2>
         </div>
         <div className="projects-wrapper">
           <div className="projects-wrapper-top">
@@ -101,15 +101,15 @@ const Projects = () => {
                 <p className="click-for-modal">Click on this image to get a sneak peak!</p>
               </div>
             </div>
-              <div className="card-projects" onClick={() => handleClick('seenThisWeb')}>
-                  <img src={seenThisWeb} alt="SeenThis website" className='projects-image'/>
-                  <div className="projects-text">
-                      <h2>SeenThis website</h2>
-                      <p>During my internship I got the opportunity to create new and update existing pages to the SeenThis website.
-                      </p>
-                      <p className="click-for-modal">Click on this image to get a sneak peak!</p>
-                  </div>
+            <div className="card-projects" onClick={() => handleClick('seenThisWeb')}>
+              <img src={seenThisWeb} alt="SeenThis website" className='projects-image'/>
+              <div className="projects-text">
+                  <h2>SeenThis website</h2>
+                  <p>During my internship I got the opportunity to create new and update existing pages to the SeenThis website.
+                  </p>
+                  <p className="click-for-modal">Click on this image to get a sneak peak!</p>
               </div>
+            </div>
           </div>
           <div className="projects-wrapper-bottom">
             <div className="card-projects">
