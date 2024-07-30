@@ -48,6 +48,8 @@
   
   .ul-header {
     display: flex;
+    /* align-items: center; */
+    margin: auto 0;
     gap: 2rem;
     font-size: 1.3rem;
   }

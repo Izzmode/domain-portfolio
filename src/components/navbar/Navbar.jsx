@@ -91,7 +91,7 @@ const Navbar = () => {
               :   
             <div className='rainbow-icon-wrapper'>
               <PiRainbowCloudBold className='rainbow-icon'/>
-              <div className='shimmer-icon'></div>
+              {/* <div className='shimmer-icon'></div> */}
             </div>
           }
           </li>

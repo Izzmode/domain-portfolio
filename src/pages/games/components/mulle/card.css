@@ -1,0 +1,18 @@
+.Card {
+    width: 120px;
+    background-color: white;
+    height: 150px;
+    color: black;
+}
+
+.hej {
+  border: 3px solid green;
+}
+
+.prel {
+  border: 3px solid yellow;
+}
+
+.selected {
+  border: 3px solid blue;
+}
