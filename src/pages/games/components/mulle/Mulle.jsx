@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Card from './card';
+import Card from './Card';
 import './mulle.css'
 
 const Mulle = () => {
