@@ -25,7 +25,7 @@ function App() {
           </>
         } />
         <Route path="/games" element={<Games />} />
-        <Route path="/games/hej" element={<Mulle />} />
+        <Route path="/games/mulle" element={<Mulle />} />
       </Routes>
       <Footer />
     </>
