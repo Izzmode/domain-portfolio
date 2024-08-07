@@ -60,6 +60,10 @@
     background-color: white;
   }
 
+  .back-btn {
+    width: 150px;
+  }
+
   .btn {
     padding: .6rem;
     border-radius: 8px;
@@ -75,6 +79,7 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    padding-bottom: 1rem;
   }
 
   .options {
@@ -85,7 +90,8 @@
     gap: 1rem;
     justify-content: space-between;
     /* align-items: center; */
-    margin-bottom: 1rem;
+    padding: 1rem .5rem;
+
   }
 
   .d-none {
@@ -96,5 +102,15 @@
   .active {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
     opacity: 1;
+  }
+
+  .build-wrapper {
+    position: relative;
+
+    .build-card {
+      position: relative;
+      border: 1px solid black;
+      box-shadow: 3px 3px 3px;
+    }
   }
 }

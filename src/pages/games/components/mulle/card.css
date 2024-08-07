@@ -2,10 +2,11 @@
     width: 120px;
     background-color: white;
     height: 150px;
+    height: 9rem;
     color: black;
 }
 
-.hej {
+.chosen {
   border: 3px solid green;
 }
 
@@ -15,4 +16,8 @@
 
 .selected {
   border: 3px solid blue;
+}
+
+.hej {
+  border: 3px solid purple;
 }

@@ -1,41 +1,22 @@
 import { useState, useEffect } from 'react'
 import Card from './Card';
+import { generateDeck, shuffleDeck, countBuild } from './helper';
 import './mulle.css'
 
 const Mulle = () => {
 
-  const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
-  const ranks = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'];
-
-  const generateDeck = () => {
-    const deck = [];
-    for (let i = 0; i < 2; i++) {
-      for (const suit of suits) {
-        for (const rank of ranks) {
-          deck.push({ suit, rank, id: `${suit}-${rank}-${i}` });
-        }
-      }
-    }
-    return deck;
-  };
-
-  const shuffleDeck = (deck) => {
-    for (let i = deck.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [deck[i], deck[j]] = [deck[j], deck[i]];
-    }
-    return deck;
-  };
-  
   const initialDeck = shuffleDeck(generateDeck());
   const [activeDeck, setActiveDeck] = useState(initialDeck);
 
-  const [playersDeck, setPlayersDeck] = useState([]);
+  const [playerScorePile, setPlayerScorePile] = useState([]);
+  const [playerMullePile, setPlayerMullePile] = useState([])
   const [playersHand, setPlayersHand] = useState([]);
 
-  const [opponentsDeck, setOpponentsDeck] = useState(null);
-  const [opponentsHand, setOpponentsHand] = useState(null);
+  const [opponentScorePile, setOpponentScorePile] = useState([]);
+  const [opponentMullePile, setOpponentMullePile] = useState([])
+  const [opponentsHand, setOpponentsHand] = useState([]);
 
+  //behövs cards in play?
   const [cardsInPlay, setCardsInPlay] = useState([])
   const [cardsOnTable, setCardsOnTable] = useState([])
 
@@ -48,6 +29,7 @@ const Mulle = () => {
   const [boardActive, setBoardActive] = useState(false)
   const [handActive, setHandActive] = useState(false)
 
+  //gör om till key value pairs?
   const [playingMulle, setPlayingMulle] = useState(false)
   const [playingTired, setPlayingTired] = useState(false)
   const [playingBuild, setPlayingBuild] = useState(false)
@@ -56,16 +38,20 @@ const Mulle = () => {
   const [playingPickUp, setPlayingPickUp] = useState(false)
 
   const [showAllButtons, setShowAllButtons] = useState(true)
+  const [isCardAdded, setIsCardAdded] = useState(false);
 
-  const choseCardOnBoard = (selectedCard) => {
-    if (!chosenCardToPlay) return;
+
+  //dessa två för pick up cards on board?
+  const pickUpCardsFromBoard = (selectedCard) => {
+    console.log(selectedCard, 'selectedCard i pickUpCardsFromBoard')
   
     const newSelectedCards = selectedCards.includes(selectedCard)
       ? selectedCards.filter((c) => c !== selectedCard)
       : [...selectedCards, selectedCard];
+    
   
     const totalValue = newSelectedCards.reduce((sum, c) => sum + parseInt(c.rank, 10), 0);
-    const chosenValue = parseInt(chosenCardToPlay.rank, 10);
+    const chosenValue = parseInt(chosenCardHand.rank, 10);
   
     if (totalValue > chosenValue) {
       //fixa felmeddelande
@@ -85,22 +71,20 @@ const Mulle = () => {
     }
   };
   
+  // const choseWhichCardToPlay = (card) => {
+  //   //togglar
+  //   if (card === chosenCardToPlay) {
+  //     setChosenCardToPlay(null);
+  //     setSelectedCards([]);
+  //     setMatchedSelectedCards([])
 
-  const choseWhichCardToPlay = (card) => {
-    if (card === chosenCardToPlay) {
-      setChosenCardToPlay(null);
-      setSelectedCards([]);
-      setMatchedSelectedCards([])
+  //   } else {
+  //     setChosenCardToPlay(card);
+  //     setSelectedCards([]);
+  //     setMatchedSelectedCards([])
+  //   }
+  // };
 
-    } else {
-      setChosenCardToPlay(card);
-      setSelectedCards([]);
-      setMatchedSelectedCards([])
-    }
-  };
-
-  const [isCardAdded, setIsCardAdded] = useState(false);
-  
   const dispurseFirstRoundOfCards = () => {
     const newDeck = [...activeDeck];
     const cardsOnTable = newDeck.splice(0, 24);
@@ -115,12 +99,6 @@ const Mulle = () => {
     setPlayersHand(playersHand)
     setCardsOnTable(visibleCards)
   }
-
-  const removedCards = [
-    { id: 'hearts-2-0' },
-    { id: 'diamonds-5-1' },
-    { id: 'spades-K-0' }
-  ];
 
   const addOneNewCard = (cardRemoved, player) => {
     const newDeck = [...activeDeck];
@@ -163,82 +141,164 @@ const Mulle = () => {
     }
   }, [opponentsHand]);
 
-  useEffect(() => {
-    console.log(playersDeck)
-  }, [playersDeck]);
+  // useEffect(() => {
+  //   console.log(playerScorePile, 'playerScorePile')
+  // }, [playerScorePile]);
+  // useEffect(() => {
+  //   console.log(playerMullePile, 'playerMullePile')
+  // }, [playerMullePile]);
 
-  const submitPoints = () => {
+  // const submitPoints = () => {
 
-    setPlayersDeck((prev) => [...prev, ...matchedSelectedCards, chosenCardToPlay])
+  //   setPlayerScorePile((prev) => [...prev, ...matchedSelectedCards, chosenCardToPlay])
 
-    //dela ut nytt kort och uppdatera kortleken
-    const newDeck = [...activeDeck];
-    const [newDealtCard] = newDeck.splice(0, 1);
-    setActiveDeck(newDeck);
+  //   //dela ut nytt kort och uppdatera kortleken
+  //   const newDeck = [...activeDeck];
+  //   const [newDealtCard] = newDeck.splice(0, 1);
+  //   setActiveDeck(newDeck);
 
-    const newPlayersHand = playersHand.filter(function(item) {
-      return item !== chosenCardToPlay  
-    })
+  //   const newPlayersHand = playersHand.filter(function(item) {
+  //     return item !== chosenCardToPlay  
+  //   })
     
-    const newCardsOnTable = cardsOnTable.filter((item) => 
-      !matchedSelectedCards.some((selectedCard) => selectedCard.id === item.id)
-    );
+  //   const newCardsOnTable = cardsOnTable.filter((item) => 
+  //     !matchedSelectedCards.some((selectedCard) => selectedCard.id === item.id)
+  //   );
 
-    setCardsOnTable(newCardsOnTable)
-    setPlayersHand([...newPlayersHand, newDealtCard ])
-    setMatchedSelectedCards([])
+  //   setCardsOnTable(newCardsOnTable)
+  //   setPlayersHand([...newPlayersHand, newDealtCard ])
+  //   setMatchedSelectedCards([])
 
-  }
+  // }
 
+  //MOVES FUNCTIONS
   const addCardToBoard = (card) => {
-
-    //dela ut nytt kort och uppdatera kortleken
-    const newDeck = [...activeDeck];
-    const [newDealtCard] = newDeck.splice(0, 1);
-    setActiveDeck(newDeck);
+    console.log('körs här')
 
     const newPlayersHand = playersHand.filter(function(item) {
       return item !== card  
     })
     const newCardsOnTable = [...cardsOnTable, card];
-    console.log(newCardsOnTable, 'newcards on table, blir det fel?')
     
     setCardsOnTable(newCardsOnTable)
-    setPlayersHand([...newPlayersHand, newDealtCard ])
+    setPlayersHand([...newPlayersHand ])
+    setPlayingLay(false)
+    //köra någon reset? när kortet är lagt så gå tillbaka
+    //så sätt showAllButtons till true, men måste också kör motståndare?
     //ha kvar den, för man kan clicka i dom
     setMatchedSelectedCards([])
   }
 
-  console.log(cardsOnTable, 'cardsontable utandör')
+  const [chosenCardHand, setChosenCardHand] = useState([])
+  const [chosenCardTable, setChosenCardTable] = useState([])
 
-  //tbd different modes beroende på vad du vill göra? 
-  //bygga, låsa, (mulle? eftersom den får man inte ta mer av), lägga kort, ta kort?
+  //tbd okej så många tankar
+  //ha istället att man bara setChosenCard (hand eller table) och sen kör funktionen i sista steget?
+  //vad ska köras i makeMove?
+  //kör setChosenCardHand på alla moves som har playerHand först?
+  //nu när jag har olika alternativ kanske alla kan börja med spelarens hand?
+  //i så fall så kan jag setChosenCardHand direkt...
+  //fast inte på build...eller kanske?
 
-  const onPickMulle = () => {
-    setBoardActive(true)
-    const newCardsOnTable = cardsOnTable.filter(card => {
 
+  const pickMulleTable = (card) => {
+    if((chosenCardHand.rank !== card.rank) && (chosenCardHand.suit !== card.suit)) {
+      console.log('no match')
+      return
+    }
+    const newPlayersHand = playersHand.filter(function(item) {
+      return item !== chosenCardHand  
     })
+    const newCardsOnTable = cardsOnTable.filter(function(item){
+      return item !== card
+    })
+    setCardsOnTable(newCardsOnTable)
+    setPlayersHand(newPlayersHand)
+    setPlayerMullePile(prev => [...prev, chosenCardHand])
+    setPlayerScorePile(prev => [...prev, card, chosenCardHand])
+    // setPlayingMulle(false)
   }
 
-  const chooseGameToPlay = (e, card) => {
-    // console.log(e, 'e', card, 'card')
+  const [buildUp, setBuildUp] = useState(false)
+  const [buildDown, setBuildDown] = useState(true)
+  const [openModal, setOpenModal] = useState(false)
+  const buildOnCard = (card, event) => {
+    //tbd check ranks in nested array for no more than 16 or less than 2.
+    //also create a function for calculation the build (- or +)
+    // if(card.rank + chosenCardHand.rank > 16) {
+    //   return
+    // }
 
-    console.log(handActive)
-    //kommentera ut for now
-    // if(!handActive) return
+    //as soon as there is an array (aka after a build has been made and this function runs again)
+    //ranks contains all the ranks of previous laid cards, but not the current one (chosenCardHand.rank)
+    let ranks = [];
 
-    const game = e.target.id;
-    // tbdsätt i en egen funktion?
-    setPlayingBuild(false)
-    setPlayingLay(false)
-    setPlayingLock(false)
-    setPlayingMulle(false)
-    setPlayingPickUp(false)
-    setPlayingTired(false)
+    //if there is an array (aka u can build up or down)
+    //always have modal. wish to build up to x or wish to build down to y?
+    //or even (later maybe) you can not build on this pile with the card you have chosen
+
+    const onlyBuildUp = cardsOnTable.map((item) => {
+      if (Array.isArray(item)) {
+          // setOpenModal(true)
+          //if array exists get all the ranks and but them in a array
+          item.filter(obj => {
+            ranks.push(obj.rank);
+          })
+          return false; 
+        }else {
+          return true
+        }
+    });
+
+    console.log(ranks, 'fungerar det?')
+
+    if((+card.rank + +chosenCardHand.rank > 16) && onlyBuildUp) {
+      return
+    }
+    
+
+    const newPlayersHand = playersHand.filter(function(item) {
+      return item !== chosenCardHand  
+    })
+
+    const updatedCardsOnTable = cardsOnTable.map((item) => {
+      // If item is an array, check if the card is in the nested array
+      if (Array.isArray(item)) {
+        // Card is found in the nested array, push chosenCardHand to it
+        if (item.some(nestedCard => nestedCard.id === card.id)) {
+          //if building down has been chosen, make the rank negative (tbd, make everything positive later when calc score)
+          if(!openModal && buildDown) {
+            chosenCardHand.rank = -Math.abs(Number(chosenCardHand.rank));
+            item.push(chosenCardHand);  // This line uses `push` to add `chosenCardHand` to the existing nested array
+          } else {
+            item.push(chosenCardHand)
+          }
+          return item;  // Return the modified nested array
+        }
+      } else if (item.id === card.id) {
+        // If item matches the card, create a new array with item and chosenCardHand
+        return [item, chosenCardHand];
+      }
+      // No match, return the item as it is
+      return item;
+    });
+
+    countBuild(card, playersHand, chosenCardHand, ranks)
+    setCardsOnTable(updatedCardsOnTable)
+    setPlayersHand(newPlayersHand)
+  }
+
+  
+
+  const chooseMoveToMake = (e) => {
+
+    const move = e.target.id;
+
+    resetChosenMove()
+    setHandActive(true)
     setShowAllButtons(false)
 
-    switch(game) {
+    switch(move) {
       case 'mulle':
       setPlayingMulle(true)
       setHandActive(true)
@@ -247,7 +307,6 @@ const Mulle = () => {
 
       case 'build':
       setPlayingBuild(true)
-      console.log('build')
       break;
 
       case 'tired':
@@ -264,7 +323,6 @@ const Mulle = () => {
       //tbd gör om bara så de andra alterantiven försinner
       //highlighta players card
       //ändra texten i knappen till submit
-      // addCardToBoard()
       setHandActive(true)
       setPlayingLay(true)
       break;
@@ -278,12 +336,13 @@ const Mulle = () => {
 
   }
 
-  const playGame = (card) => {
+  const makeMove = (card, event) => {
 
     if(playingMulle) {
-      console.log('you are playing mulle')
+      pickMulleTable(card, event);
     } else if(playingBuild) {
-      console.log('you are playing build')
+      buildOnCard(card, event)
+
     } else if (playingLay) {
       addCardToBoard(card)
       //återställa efter man kört?
@@ -294,6 +353,7 @@ const Mulle = () => {
       console.log('you are playing lock')
 
     } else if(playingPickUp) {
+      pickUpCardsFromBoard(card)
       console.log('you are playing pickUp')
 
     } else if(playingTired) {
@@ -304,98 +364,221 @@ const Mulle = () => {
     }
 
   }
+  console.log(cardsOnTable)
+
+  const resetChosenMove = () => {
+    setPlayingBuild(false)
+    setPlayingLay(false)
+    setPlayingLock(false)
+    setPlayingMulle(false)
+    setPlayingPickUp(false)
+    setPlayingTired(false)
+    setBoardActive(false)
+    setHandActive(false)
+  }
+
+  // tbd ev denna när motståndaren kört? ändra namn, generalisera?
+  const onGoBack = () => {
+    resetChosenMove()
+    setShowAllButtons(true)
+  }
+
+  const playerCardIsClicked = (card) => {
+    setChosenCardHand(card)
+    if(playingLay) {
+      return
+    }
+
+      if (card === chosenCardHand) {
+        setChosenCardHand([]);
+        setSelectedCards([]);
+        setMatchedSelectedCards([])
+  
+      } else {
+        setChosenCardHand(card);
+        setSelectedCards([]);
+        setMatchedSelectedCards([])
+      }
+
+  }
 
   return (
     <div className='Mulle'>
-      <div className={`cards-table ${boardActive && 'active'}`}>
-          {cardsOnTable?.map((card) => (
+      {/* <div className={`cards-table ${boardActive && 'active'}`}>
+          {cardsOnTable?.map((card, index) => (
+            <div className="build-wrapper" id={index}>
           <Card
           key={card.id}
           card={card} 
-          choseCardOnBoard={choseCardOnBoard}
           chosenCardToPlay={chosenCardToPlay}
           isSelected={selectedCards.includes(card)}
           isMatched={matchedSelectedCards.includes(card)}
           tablesCard={true}
-          chooseGameToPlay={chooseGameToPlay}
+          chooseMoveToMake={chooseMoveToMake}
           playingBuild
           playingLay
           playingLock
           playingMulle
           playingPickUp
           playingTired
+          makeMove={makeMove}
           />
+          </div>
         ))}
+      </div> */}
+      <div className={`cards-table ${boardActive && 'active'}`}>
+        {cardsOnTable?.map((card, index) => {
+          // Check if card is an array
+          if (Array.isArray(card)) {
+            return (
+              <div className="build-wrapper" id={index} key={index}>
+                {card.map((nestedCard, nestedIndex) => (
+                  <div 
+                  className="build-card" 
+                  style={
+                    nestedIndex !== 0
+                      ? { marginTop: '-8rem'}
+                      : { marginTop: '0' }
+                  }
+                  >
+                  <Card
+                    key={nestedCard.id}
+                    nestedArray={card}
+                    card={nestedCard}
+                    nestedIndex={nestedIndex}
+                    chosenCardToPlay={chosenCardToPlay}
+                    isSelected={selectedCards.includes(nestedCard)}
+                    isMatched={matchedSelectedCards.includes(nestedCard)}
+                    tablesCard={true}
+                    chooseMoveToMake={chooseMoveToMake}
+                    playingBuild
+                    playingLay
+                    playingLock
+                    playingMulle
+                    playingPickUp
+                    playingTired
+                    makeMove={makeMove}
+                  />
+                  </div>
+                ))}
+              </div>
+            );
+          } else {
+            // If card is not an array, render as usual
+            return (
+                <Card
+                  key={card.id}
+                  card={card}
+                  chosenCardToPlay={chosenCardToPlay}
+                  isSelected={selectedCards.includes(card)}
+                  isMatched={matchedSelectedCards.includes(card)}
+                  tablesCard={true}
+                  chooseMoveToMake={chooseMoveToMake}
+                  playingBuild
+                  playingLay
+                  playingLock
+                  playingMulle
+                  playingPickUp
+                  playingTired
+                  makeMove={makeMove}
+                />
+            );
+          }
+        })}
       </div>
+
       <div className="card-and-options-wrapper">
             {/* <p className='error'>{errorMessage && errorMessage}</p> */}
           {showAllButtons &&
             <p>What do you wish to do?</p>
           }
           <div className='options'>
-          { (playingLay || showAllButtons) &&
+            {
+              !showAllButtons &&
+              <button 
+              className='back-btn btn' 
+              id="back" 
+              onClick={onGoBack}>
+                Go back
+              </button>
+            }
+            {playingLay ?
+            <p>Click on the card you wish to add to the board</p>
+            :
+            playingBuild ?
+            <p>Click on the card in your hand you wish to add as building block, then click on the card on the board you wish to add it to.</p>
+            :
+            playingMulle ?
+            <p>Click on the card in your hand you wish to take your Mulle with, then click on the Mulle on the Board to take it</p>
+            :
+            playingLock ?
+            <>
+            <p>Förklara här</p>
+            <p>och här</p>
+            </>
+            :
+            playingPickUp ?
+            <p>Click on the card in your hand you wish to use to take cards from the board</p>
+            :
+            playingTired &&
+            <p>Chose the Built or Locked pile of cards you wish to tire, then choose the card from your hand you wish to add</p>
+            }
+          {showAllButtons &&
             <button 
             className='add-btn btn' 
             id="lay" 
-            onClick={chooseGameToPlay}>
+            onClick={chooseMoveToMake}>
               Add a card to the board
             </button>
-            }
-            { cardsOnTable.length > 0 &&
+          }
+            { (cardsOnTable.length > 0 && showAllButtons) &&
             <>
-            { (playingBuild || showAllButtons) &&
             <button 
             className='add-btn btn' 
             id="build" 
-            onClick={chooseGameToPlay}>
+            onClick={chooseMoveToMake}>
               Build on a card
             </button>
-            }
-            { (playingLock || showAllButtons) &&
             <button 
             className='add-btn btn' 
             id="lock" 
-            onClick={chooseGameToPlay}>
+            onClick={chooseMoveToMake}>
               Lock cards
             </button>
-            }
-            { (playingTired || showAllButtons) &&
             <button 
             className='add-btn btn' 
             id="tired" 
-            onClick={chooseGameToPlay}>
+            onClick={chooseMoveToMake}>
               Tired
             </button>
-            }
-            { (playingPickUp || showAllButtons) &&
             <button 
             className='submit-btn btn' 
             id="pickUp" 
-            onClick={chooseGameToPlay}>
+            onClick={chooseMoveToMake}>
               Pick up cards from the board
             </button>
-            }
-            { (playingMulle || showAllButtons) &&
             <button 
             className='submit-btn btn' 
             id="mulle" 
-            onClick={chooseGameToPlay}>
+            onClick={chooseMoveToMake}>
               Take Mulle
             </button>
-            }
             </>
           }
-          </div>
+        
+        </div>
       <div className={`cards-player ${handActive && 'active'}`}>
       {playersHand?.map((card) => (
           <Card 
           key={card.id} 
           card={card} 
-          choseWhichCardToPlay={choseWhichCardToPlay} 
           chosenCardToPlay={chosenCardToPlay}
           playersCard={true}
           handActive={handActive}
-          playGame={playGame}
+          makeMove={makeMove}
+          playerCardIsClicked={playerCardIsClicked}
+          playingLay={playingLay}
+          chosenCardHand={chosenCardHand}
           />
         ))}
       </div>

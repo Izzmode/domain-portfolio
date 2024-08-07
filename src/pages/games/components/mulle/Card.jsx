@@ -3,14 +3,12 @@ import './card.css'
 
 const Card = ({ 
   card, 
-  choseWhichCardToPlay, 
   chosenCardToPlay, 
-  choseCardOnBoard, 
   isSelected, 
   isMatched,
   tablesCard=false,
   playersCard=false,
-  chooseGameToPlay,
+  chooseMoveToMake,
   playingBuild,
   playingLay,
   playingLock,
@@ -18,17 +16,58 @@ const Card = ({
   playingPickUp,
   playingTired,
   handActive,
-  playGame
+  makeMove,
+  chosenCardHand,
+  playerCardIsClicked,
+  nestedIndex,
+  nestedArray
 }) => {
+
+  //när ska vilken funktion köras?
+  //översta diven är kortet/korten i spelarens händer
+  //understa diven är kortet/korten på bordet
+  //båda kan tillhöra samma spelomgång..
+  //ha ett state, making a move? så länge den är aktiv..?
+
+  const [isTopCard, setIsTopCard] = useState(false)
+  // const isTopCard1 = nestedIndex && (nestedArrayL == nestedIndex)
+
+  if(nestedArray && (nestedArray?.length === nestedIndex+1)) {
+    console.log('hej')
+  }
+  // console.log(nestedArray, 'array')
+  // console.log(nestedArray?.length, 'length')
+  // console.log(nestedIndex, 'index')
+
+  const test = nestedArray && (nestedArray?.length === nestedIndex+1)
+  // console.log(test)
 
   return (
     <>
     {playersCard ?
-    <div className={`Card ${chosenCardToPlay === card && 'hej'}`} onClick={() => playGame(card)}>{card.suit} {card.rank}</div>
+    
+    playingLay ?
+    <div
+    id="playerCard" 
+    className={`Card ${chosenCardToPlay === card ? 'chosen' : ''}`} 
+    onClick={() => makeMove(card)}
+    >
+      {card.suit} {card.rank}
+    </div>
+    :
+    <div
+      id={card.id} 
+      className={`Card ${chosenCardHand === card ? 'chosen' : ''}`} 
+      onClick={() => playerCardIsClicked(card)}
+    >
+      {card.suit} {card.rank}
+    </div>
+
     :
     <div 
-      className={`Card ${chosenCardToPlay === card && 'hej'} ${isSelected && 'selected'} ${isMatched && 'prel'}`}
-      onClick={() => choseCardOnBoard(card)}
+      id={card.id}
+      className={`Card ${nestedArray && test ? 'hej' : 'då'} ${isSelected && 'selected'} ${isMatched && 'prel'}`}
+      onClick={(event) => makeMove(card, event)}
     >
       {card.suit} {card.rank}
     </div>
