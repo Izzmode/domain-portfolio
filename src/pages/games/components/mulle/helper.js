@@ -21,45 +21,55 @@ export const shuffleDeck = (deck) => {
   return deck;
 }
 
-//tbd döp om? hantera modal här? ta in states eller ha ytterliggare en funkntion i denna?
-export const countBuild = (initialCard, playersHand, cardInHand, ranks) => {
+export const countBuild = (playersHand, cardInHand, ranks) => {
 
-  if(ranks.length < 0) {
-    return
-  } else {
+  let currentValueOfBuildPile = 0;
 
-    let currentValueOfBuildPile = 0;
+  // Calculate the current value of the build pile from the ranks array
+  if (ranks.length > 0) {
     for (let i = 0; i < ranks.length; i++) {
       currentValueOfBuildPile += ranks[i];
     }
-
-    const valueOfBuildPileAfterAddingCard = currentValueOfBuildPile + cardInHand.rank;
-  
-    if(valueOfBuildPileAfterAddingCard > 16) {
-      console.log('can not build above 16')
-      return
-    }
-    if(valueOfBuildPileAfterAddingCard < 2) {
-      console.log('can not build lower than 2')
-      return
-    }
-  
-    const newPlayersHand = playersHand.filter(card => {
-      return card !== cardInHand
-    })
-  
-    const isPermittedToLayChosenCard = newPlayersHand.some(card => {
-      return card.rank === valueOfBuildPileAfterAddingCard
-    })
-
-    if(!isPermittedToLayChosenCard) {
-      return
-    }
   }
 
-  
+  //what value of the build pile will be after added card (+/-)
+  let valueOfBuildPileAfterAddingCard = currentValueOfBuildPile + cardInHand.rank;
+  let valueOfBuildPileAfterSubtractingCard = currentValueOfBuildPile - cardInHand.rank;
 
-}
+  let buildUp = false;
+  let buildDown = false;
+
+  //checking if the number being builts value is in players hand (except from the one being built with)
+  const newPlayersHand = playersHand.filter(card => card !== cardInHand);
+  const isPermittedToLayChosenCard = newPlayersHand.some(card => {
+    return (
+      card.rank === valueOfBuildPileAfterAddingCard ||
+      card.rank === valueOfBuildPileAfterSubtractingCard
+    );
+  });
+
+  // Check if building up is possible
+  if (valueOfBuildPileAfterAddingCard <= 16) {
+    buildUp = true;
+  } else {
+    buildUp = false;
+  }
+
+  // Check if building down is possible
+  if (valueOfBuildPileAfterSubtractingCard >= 2 && ranks.length !== 1) {
+    buildDown = true;
+  } else {
+    buildDown = false;
+  }
+
+  return {
+    isPermittedToLayChosenCard,
+    buildUp,
+    buildDown
+  };
+};
+
+
 
 //lägg till calculate funktioner till pile, mulle och slutgiltigt?
 

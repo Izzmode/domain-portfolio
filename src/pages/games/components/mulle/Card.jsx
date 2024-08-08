@@ -17,30 +17,13 @@ const Card = ({
   playingTired,
   handActive,
   makeMove,
-  chosenCardHand,
+  chosenCardFromHand,
   playerCardIsClicked,
   nestedIndex,
   nestedArray
 }) => {
 
-  //när ska vilken funktion köras?
-  //översta diven är kortet/korten i spelarens händer
-  //understa diven är kortet/korten på bordet
-  //båda kan tillhöra samma spelomgång..
-  //ha ett state, making a move? så länge den är aktiv..?
-
-  const [isTopCard, setIsTopCard] = useState(false)
-  // const isTopCard1 = nestedIndex && (nestedArrayL == nestedIndex)
-
-  if(nestedArray && (nestedArray?.length === nestedIndex+1)) {
-    console.log('hej')
-  }
-  // console.log(nestedArray, 'array')
-  // console.log(nestedArray?.length, 'length')
-  // console.log(nestedIndex, 'index')
-
   const test = nestedArray && (nestedArray?.length === nestedIndex+1)
-  // console.log(test)
 
   return (
     <>
@@ -57,7 +40,7 @@ const Card = ({
     :
     <div
       id={card.id} 
-      className={`Card ${chosenCardHand === card ? 'chosen' : ''}`} 
+      className={`Card ${chosenCardFromHand === card ? 'chosen' : ''}`} 
       onClick={() => playerCardIsClicked(card)}
     >
       {card.suit} {card.rank}
@@ -67,7 +50,7 @@ const Card = ({
     <div 
       id={card.id}
       className={`Card ${nestedArray && test ? 'hej' : 'då'} ${isSelected && 'selected'} ${isMatched && 'prel'}`}
-      onClick={(event) => makeMove(card, event)}
+      onClick={(event) => makeMove(card, event, nestedArray)}
     >
       {card.suit} {card.rank}
     </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import Card from './Card';
 import { generateDeck, shuffleDeck, countBuild } from './helper';
+import Card from './Card';
+import Modal from './Modal'
 import './mulle.css'
 
 const Mulle = () => {
@@ -40,36 +41,133 @@ const Mulle = () => {
   const [showAllButtons, setShowAllButtons] = useState(true)
   const [isCardAdded, setIsCardAdded] = useState(false);
 
+  const dispurseFirstRoundOfCards = () => {
+    const newDeck = [...activeDeck];
+    const cardsOnTable = newDeck.splice(0, 24);
+    setActiveDeck(newDeck);
+    setCardsInPlay(cardsOnTable);
+    
+    const newCardsInPlay = [...cardsOnTable]
+    const playersHand = newCardsInPlay.splice(0, 8)
+    const opponentsHand = newCardsInPlay.splice(0, 8)
+    const visibleCards = newCardsInPlay.splice(0, 8)
+    setOpponentsHand(opponentsHand)
+    setPlayersHand(playersHand)
+    setCardsOnTable(visibleCards)
+  }
+  useEffect(() => {
+    dispurseFirstRoundOfCards()    
+  }, [])
 
   //dessa två för pick up cards on board?
-  const pickUpCardsFromBoard = (selectedCard) => {
-    console.log(selectedCard, 'selectedCard i pickUpCardsFromBoard')
+  // const pickUpCardsFromBoard = (selectedCard, nestedArray) => {
   
-    const newSelectedCards = selectedCards.includes(selectedCard)
-      ? selectedCards.filter((c) => c !== selectedCard)
-      : [...selectedCards, selectedCard];
+  //   const newSelectedCards = selectedCards.includes(selectedCard)
+  //     ? selectedCards.filter((c) => c !== selectedCard)
+  //     : [...selectedCards, selectedCard];
     
   
-    const totalValue = newSelectedCards.reduce((sum, c) => sum + parseInt(c.rank, 10), 0);
-    const chosenValue = parseInt(chosenCardHand.rank, 10);
+  //   const totalValue = newSelectedCards.reduce((sum, c) => sum + parseInt(c.rank, 10), 0);
+  //   const chosenValue = parseInt(chosenCardFromHand.rank, 10);
   
-    if (totalValue > chosenValue) {
-      //fixa felmeddelande
-      setErrorMessage('Total value exceeds chosen card rank');
+  //   if (totalValue > chosenValue) {
+  //     //fixa felmeddelande
+  //     setErrorMessage('Total value exceeds chosen card rank');
+  //   } else {
+  //     setSelectedCards(newSelectedCards);
+  
+  //     if (totalValue === chosenValue) {
+  //       setMatchedSelectedCards((prev) => [...prev, ...newSelectedCards]);
+  //       //start a new så att säga. 
+  //       //markera synligt att de är "par"
+  //       //gör så man kan klicka på andra.
+  //       // setVisibleCards((prev) => prev.filter((c) => !newSelectedCards.includes(c)));
+  //       setSelectedCards([]);
+  //     }
+  //   }
+  // };
+
+  // const choseWhichCardToPlay = (card) => {
+//   //togglar
+//   if (card === chosenCardToPlay) {
+//     setChosenCardToPlay(null);
+//     setSelectedCards([]);
+//     setMatchedSelectedCards([])
+
+//   } else {
+//     setChosenCardToPlay(card);
+//     setSelectedCards([]);
+//     setMatchedSelectedCards([])
+//   }
+// };
+const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
+  const clickedCardId = event.target.id; // ID of the clicked card
+  const chosenCardValue = chosenCardFromHand.rank; // Assuming rank is already a number
+
+  // 1. Handle Nested Array Separately
+  if (nestedArray) {
+    const nestedArrayTotalValue = nestedArray.reduce((sum, c) => sum + c.rank, 0);
+
+    if (nestedArrayTotalValue === chosenCardValue) {
+      // Check if the nested array is already in matchedSelectedCards
+      const alreadyMatched = matchedSelectedCards.some(card => nestedArray.includes(card));
+
+      if (alreadyMatched) {
+        // Remove the nested array from matchedSelectedCards
+        setMatchedSelectedCards(prev => prev.filter(card => !nestedArray.includes(card)));
+      } else {
+        // Add the nested array to matchedSelectedCards
+        setMatchedSelectedCards(prev => [...prev, ...nestedArray]);
+      }
+      // Clear selected cards when a nested array is matched
+      setSelectedCards([]);
+      setErrorMessage(''); // Clear any error message
+      return; // Exit after handling the nested array
     } else {
-      setSelectedCards(newSelectedCards);
-  
-      if (totalValue === chosenValue) {
-        setMatchedSelectedCards((prev) => [...prev, ...newSelectedCards]);
-        //start a new så att säga. 
-        //markera synligt att de är "par"
-        //gör så man kan klicka på andra.
-        // setVisibleCards((prev) => prev.filter((c) => !newSelectedCards.includes(c)));
-        setSelectedCards([]); // Reset selectedCards array after successful match
-        // alert('Matched!');
+      setErrorMessage('Nested array total does not match the chosen card rank');
+      return; // Exit if the nested array doesn't match
+    }
+  }
+
+  // 2. Handle Individual Card Selection
+  const newSelectedCards = selectedCards.includes(selectedCard)
+    ? selectedCards.filter(c => c !== selectedCard) // Toggle off
+    : [...selectedCards, selectedCard]; // Toggle on
+
+  // 3. Calculate the total value of the newly selected cards
+  const selectedCardsTotalValue = newSelectedCards.reduce((sum, c) => sum + c.rank, 0);
+
+  // 4. Check if the selected cards match the chosen card's rank
+  if (selectedCardsTotalValue > chosenCardValue) {
+    setErrorMessage('Total value exceeds chosen card rank');
+  } else {
+    setSelectedCards(newSelectedCards);
+    setErrorMessage(''); // Clear any previous error messages
+
+    // Match if total value equals chosen card's rank
+    if (selectedCardsTotalValue === chosenCardValue) {
+      // Check if the newSelectedCards are already in matchedSelectedCards
+      const alreadyMatched = matchedSelectedCards.some(card => newSelectedCards.includes(card));
+      
+      if (alreadyMatched) {
+        // Remove the new selected cards from matchedSelectedCards
+        setMatchedSelectedCards(prev => prev.filter(card => !newSelectedCards.includes(card)));
+      } else {
+        // Add new selected cards to matchedSelectedCards
+        setMatchedSelectedCards(prev => [...prev, ...newSelectedCards]);
+        setSelectedCards([]); // Clear selection after matching
       }
     }
-  };
+  }
+};
+
+  
+
+  
+
+  
+  
+  
   
   // const choseWhichCardToPlay = (card) => {
   //   //togglar
@@ -85,61 +183,44 @@ const Mulle = () => {
   //   }
   // };
 
-  const dispurseFirstRoundOfCards = () => {
-    const newDeck = [...activeDeck];
-    const cardsOnTable = newDeck.splice(0, 24);
-    setActiveDeck(newDeck);
-    setCardsInPlay(cardsOnTable);
-    
-    const newCardsInPlay = [...cardsOnTable]
-    const playersHand = newCardsInPlay.splice(0, 8)
-    const opponentsHand = newCardsInPlay.splice(0, 8)
-    const visibleCards = newCardsInPlay.splice(0, 8)
-    setOpponentsHand(opponentsHand)
-    setPlayersHand(playersHand)
-    setCardsOnTable(visibleCards)
-  }
 
-  const addOneNewCard = (cardRemoved, player) => {
-    const newDeck = [...activeDeck];
-    const dealtCard = newDeck.splice(0, 1)[0];
-    setActiveDeck(newDeck)
+  // const addOneNewCard = (cardRemoved, player) => {
+  //   const newDeck = [...activeDeck];
+  //   const dealtCard = newDeck.splice(0, 1)[0];
+  //   setActiveDeck(newDeck)
 
-    if(player) {
-      const newHand = playersHand?.filter(card => {
-        return card.id !== cardRemoved.id
-      })
+  //   if(player) {
+  //     const newHand = playersHand?.filter(card => {
+  //       return card.id !== cardRemoved.id
+  //     })
       
-      newHand.push(dealtCard)
-      setPlayersHand(newHand)
+  //     newHand.push(dealtCard)
+  //     setPlayersHand(newHand)
 
-    } else {
-      const newHand = opponentsHand?.filter(card => {
-        return card.id !== cardRemoved.id
-      })
+  //   } else {
+  //     const newHand = opponentsHand?.filter(card => {
+  //       return card.id !== cardRemoved.id
+  //     })
       
-      newHand.push(dealtCard)
-      setOpponentsHand(newHand)
+  //     newHand.push(dealtCard)
+  //     setOpponentsHand(newHand)
 
-    }
+  //   }
 
-  }
+  // }
 
-  useEffect(() => {
-    dispurseFirstRoundOfCards()    
-  }, [])
+  // useEffect(() => {
+  //   if (opponentsHand && !isCardAdded) {
+  //     const delay = setTimeout(() => {
+  //       addOneNewCard({ id: 'clubs-2-1' }, false);
+  //       setIsCardAdded(true);
+  //     }, 2000); // Delay of 3 seconds (3000 milliseconds)
 
-  useEffect(() => {
-    if (opponentsHand && !isCardAdded) {
-      const delay = setTimeout(() => {
-        addOneNewCard({ id: 'clubs-2-1' }, false);
-        setIsCardAdded(true);
-      }, 2000); // Delay of 3 seconds (3000 milliseconds)
+  //     // Clear timeout if the component unmounts
+  //     return () => clearTimeout(delay);
+  //   }
+  // }, [opponentsHand]);
 
-      // Clear timeout if the component unmounts
-      return () => clearTimeout(delay);
-    }
-  }, [opponentsHand]);
 
   // useEffect(() => {
   //   console.log(playerScorePile, 'playerScorePile')
@@ -172,8 +253,9 @@ const Mulle = () => {
   // }
 
   //MOVES FUNCTIONS
+ 
+ 
   const addCardToBoard = (card) => {
-    console.log('körs här')
 
     const newPlayersHand = playersHand.filter(function(item) {
       return item !== card  
@@ -189,106 +271,112 @@ const Mulle = () => {
     setMatchedSelectedCards([])
   }
 
-  const [chosenCardHand, setChosenCardHand] = useState([])
-  const [chosenCardTable, setChosenCardTable] = useState([])
-
-  //tbd okej så många tankar
-  //ha istället att man bara setChosenCard (hand eller table) och sen kör funktionen i sista steget?
-  //vad ska köras i makeMove?
-  //kör setChosenCardHand på alla moves som har playerHand först?
-  //nu när jag har olika alternativ kanske alla kan börja med spelarens hand?
-  //i så fall så kan jag setChosenCardHand direkt...
-  //fast inte på build...eller kanske?
-
+  const [chosenCardFromHand, setChosenCardFromHand] = useState([])
 
   const pickMulleTable = (card) => {
-    if((chosenCardHand.rank !== card.rank) && (chosenCardHand.suit !== card.suit)) {
+    if((chosenCardFromHand.rank !== card.rank) && (chosenCardFromHand.suit !== card.suit)) {
       console.log('no match')
       return
     }
     const newPlayersHand = playersHand.filter(function(item) {
-      return item !== chosenCardHand  
+      return item !== chosenCardFromHand  
     })
     const newCardsOnTable = cardsOnTable.filter(function(item){
       return item !== card
     })
     setCardsOnTable(newCardsOnTable)
     setPlayersHand(newPlayersHand)
-    setPlayerMullePile(prev => [...prev, chosenCardHand])
-    setPlayerScorePile(prev => [...prev, card, chosenCardHand])
+    setPlayerMullePile(prev => [...prev, chosenCardFromHand])
+    setPlayerScorePile(prev => [...prev, card, chosenCardFromHand])
     // setPlayingMulle(false)
   }
 
-  const [buildUp, setBuildUp] = useState(false)
-  const [buildDown, setBuildDown] = useState(true)
-  const [openModal, setOpenModal] = useState(false)
-  const buildOnCard = (card, event) => {
-    //tbd check ranks in nested array for no more than 16 or less than 2.
-    //also create a function for calculation the build (- or +)
-    // if(card.rank + chosenCardHand.rank > 16) {
-    //   return
-    // }
+  const [canBuildUp, setCanBuildUp] = useState(false)
+  const [canBuildDown, setCanBuildDown] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [isPermittedToLayChosenCard, setIsPermittedToLayChosenCard] = useState(false)
+  const [ogCardForBuild, setOgCardForBuild] = useState(null)
 
-    //as soon as there is an array (aka after a build has been made and this function runs again)
-    //ranks contains all the ranks of previous laid cards, but not the current one (chosenCardHand.rank)
+  const buildOnCard = (card) => {
     let ranks = [];
-
-    //if there is an array (aka u can build up or down)
-    //always have modal. wish to build up to x or wish to build down to y?
-    //or even (later maybe) you can not build on this pile with the card you have chosen
-
-    const onlyBuildUp = cardsOnTable.map((item) => {
+    setShowModal(true)
+    setOgCardForBuild(card)
+  
+    const getAllRanks = cardsOnTable.map((item) => {
       if (Array.isArray(item)) {
-          // setOpenModal(true)
-          //if array exists get all the ranks and but them in a array
           item.filter(obj => {
             ranks.push(obj.rank);
           })
-          return false; 
-        }else {
-          return true
+        } else {
+          return
         }
     });
 
-    console.log(ranks, 'fungerar det?')
+    if(ranks.length <= 0) {
 
-    if((+card.rank + +chosenCardHand.rank > 16) && onlyBuildUp) {
-      return
+      ranks.push(card.rank)
     }
+  
+    const {
+      isPermittedToLayChosenCard,
+      buildUp,
+      buildDown } = countBuild(playersHand, chosenCardFromHand, ranks)
+  
     
-
-    const newPlayersHand = playersHand.filter(function(item) {
-      return item !== chosenCardHand  
-    })
-
-    const updatedCardsOnTable = cardsOnTable.map((item) => {
-      // If item is an array, check if the card is in the nested array
-      if (Array.isArray(item)) {
-        // Card is found in the nested array, push chosenCardHand to it
-        if (item.some(nestedCard => nestedCard.id === card.id)) {
-          //if building down has been chosen, make the rank negative (tbd, make everything positive later when calc score)
-          if(!openModal && buildDown) {
-            chosenCardHand.rank = -Math.abs(Number(chosenCardHand.rank));
-            item.push(chosenCardHand);  // This line uses `push` to add `chosenCardHand` to the existing nested array
-          } else {
-            item.push(chosenCardHand)
-          }
-          return item;  // Return the modified nested array
-        }
-      } else if (item.id === card.id) {
-        // If item matches the card, create a new array with item and chosenCardHand
-        return [item, chosenCardHand];
-      }
-      // No match, return the item as it is
-      return item;
-    });
-
-    countBuild(card, playersHand, chosenCardHand, ranks)
-    setCardsOnTable(updatedCardsOnTable)
-    setPlayersHand(newPlayersHand)
+    if (buildUp) {
+      setCanBuildUp(true)
+    } else {
+      setCanBuildUp(false)
+    }
+    if(buildDown) {
+      setCanBuildDown(true)
+    } else {
+      setCanBuildDown(false)
+    }
+    if(isPermittedToLayChosenCard) {
+      setIsPermittedToLayChosenCard(true)
+    } else {
+      setIsPermittedToLayChosenCard(false)
+    }
+  
   }
 
+
+  const chosenBuild = (card, up) => {
+    //behövs eller fixas i modal?
+    // if((canBuildUp || canBuildDown) && isPermittedToLayChosenCard) {
   
+      const newPlayersHand = playersHand.filter(function(item) {
+        return item !== chosenCardFromHand  
+      })
+  
+      const updatedCardsOnTable = cardsOnTable.map((item) => {
+        if (Array.isArray(item)) {
+          if (item.some(nestedCard => nestedCard.id === card.id)) {
+            if(!up) {
+              chosenCardFromHand.rank = -Math.abs(Number(chosenCardFromHand.rank));
+              item.push(chosenCardFromHand); 
+            } else {
+              item.push(chosenCardFromHand)
+            }
+            return item;
+          }
+        } else if (item.id === card.id) {
+          return [item, chosenCardFromHand];
+        }
+        return item;
+      });
+  
+      setCardsOnTable(updatedCardsOnTable)
+      setPlayersHand(newPlayersHand)
+      setShowModal(false)
+      // }
+  
+  }
+
+
+
+
 
   const chooseMoveToMake = (e) => {
 
@@ -336,10 +424,11 @@ const Mulle = () => {
 
   }
 
-  const makeMove = (card, event) => {
+  const makeMove = (card, event, nestedArray) => {
 
     if(playingMulle) {
       pickMulleTable(card, event);
+
     } else if(playingBuild) {
       buildOnCard(card, event)
 
@@ -349,12 +438,12 @@ const Mulle = () => {
       //fast då ska motståndaren köra...
       //ha en funktion som kommar när isPlaying är klar typ? 
       //då köra datorns drag, sen sätta isPlating till true?
+
     } else if(playingLock) {
       console.log('you are playing lock')
 
     } else if(playingPickUp) {
-      pickUpCardsFromBoard(card)
-      console.log('you are playing pickUp')
+      pickUpCardsFromBoard(card, nestedArray, event)
 
     } else if(playingTired) {
       console.log('you are playing tired')
@@ -364,7 +453,6 @@ const Mulle = () => {
     }
 
   }
-  console.log(cardsOnTable)
 
   const resetChosenMove = () => {
     setPlayingBuild(false)
@@ -384,18 +472,18 @@ const Mulle = () => {
   }
 
   const playerCardIsClicked = (card) => {
-    setChosenCardHand(card)
+    setChosenCardFromHand(card)
     if(playingLay) {
       return
     }
 
-      if (card === chosenCardHand) {
-        setChosenCardHand([]);
+      if (card === chosenCardFromHand) {
+        setChosenCardFromHand([]);
         setSelectedCards([]);
         setMatchedSelectedCards([])
   
       } else {
-        setChosenCardHand(card);
+        setChosenCardFromHand(card);
         setSelectedCards([]);
         setMatchedSelectedCards([])
       }
@@ -426,6 +514,16 @@ const Mulle = () => {
           </div>
         ))}
       </div> */}
+      {showModal && 
+      <Modal 
+      chosenBuild={chosenBuild}
+      card={ogCardForBuild}
+      setShowModal={setShowModal}
+      canBuildUp={canBuildUp}
+      canBuildDown={canBuildDown}
+      isPermittedToLayChosenCard={isPermittedToLayChosenCard}
+      />
+      }
       <div className={`cards-table ${boardActive && 'active'}`}>
         {cardsOnTable?.map((card, index) => {
           // Check if card is an array
@@ -435,6 +533,7 @@ const Mulle = () => {
                 {card.map((nestedCard, nestedIndex) => (
                   <div 
                   className="build-card" 
+                  key={nestedCard.id}
                   style={
                     nestedIndex !== 0
                       ? { marginTop: '-8rem'}
@@ -442,7 +541,6 @@ const Mulle = () => {
                   }
                   >
                   <Card
-                    key={nestedCard.id}
                     nestedArray={card}
                     card={nestedCard}
                     nestedIndex={nestedIndex}
@@ -578,7 +676,7 @@ const Mulle = () => {
           makeMove={makeMove}
           playerCardIsClicked={playerCardIsClicked}
           playingLay={playingLay}
-          chosenCardHand={chosenCardHand}
+          chosenCardFromHand={chosenCardFromHand}
           />
         ))}
       </div>

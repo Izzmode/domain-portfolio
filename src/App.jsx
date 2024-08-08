@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation  } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar'
 import Hero from './components/hero/Hero'
 import Resume from './components/resume/Resume'
@@ -10,10 +10,12 @@ import Games from './pages/games/Games'
 import Mulle from './pages/games/components/mulle/Mulle';
 
 function App() {
-
+//tbd alternate navbar when game is active
+const location = useLocation();
+  const isGamesRoute = location.pathname.includes("games");
   return (
     <>
-      <Navbar />
+      {!isGamesRoute && <Navbar />}
       <Routes>
         <Route path="/" element={
           <>

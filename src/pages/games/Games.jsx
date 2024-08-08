@@ -9,7 +9,7 @@ const Games = () => {
 
       <div className="card-wrapper">
 
-        <NavLink to={'hej'} className='game-card'>
+        <NavLink to={'mulle'} className='game-card'>
           <img src={mulle} alt="playing cards" className='card-img'/>
           <p className='info-text'>hejsan</p>
         </NavLink>
