@@ -65,7 +65,8 @@ export const countBuild = (playersHand, cardInHand, ranks) => {
   return {
     isPermittedToLayChosenCard,
     buildUp,
-    buildDown
+    buildDown,
+    currentValueOfBuildPile
   };
 };
 

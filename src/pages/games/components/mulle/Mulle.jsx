@@ -124,6 +124,61 @@ const Mulle = () => {
   }
 };
 
+// const regretChosenCardPlacedOnTableBeforeSubmit = () => {
+//   let thisCardShouldGoBackToPlayersHand;
+//   const updatedCardsOnTable = cardsOnTable.map((item) => {
+//     if (Array.isArray(item)) {
+//       if (item.some(nestedCard => nestedCard === chosenCardFromHand)) {
+//         thisCardShouldGoBackToPlayersHand = item;
+//         return !item;
+//       }
+//     } else if (item === chosenCardFromHand) {
+//       thisCardShouldGoBackToPlayersHand = item;
+//       return !item
+//     }
+//     return item;
+//   });
+
+//   setPlayersHand(prev => [...prev, thisCardShouldGoBackToPlayersHand])
+// }
+
+const regretChosenCardPlacedOnTableBeforeSubmit = () => {
+  let thisCardShouldGoBackToPlayersHand = null;
+  console.log(chosenCardFromHand, 'chosencardfromhand i funkt')
+
+  const updatedCardsOnTable = cardsOnTable.flatMap((item) => {
+    if (Array.isArray(item)) {
+      if (item.some(nestedCard => nestedCard === chosenCardFromHand)) {
+        thisCardShouldGoBackToPlayersHand = chosenCardFromHand;
+        const remainingCards = item.filter(nestedCard => nestedCard !== chosenCardFromHand);
+
+        // If only one card remains, return that card instead of an array
+        if (remainingCards.length === 1) {
+          return remainingCards[0];
+        } else if (remainingCards.length > 1) {
+          return remainingCards;
+        } else {
+          return null; // No cards left in this array, so return null
+        }
+      }
+    } else if (item === chosenCardFromHand) {
+      thisCardShouldGoBackToPlayersHand = item;
+      return null; // Card is removed
+    }
+    return item; // If nothing changes, return the item as is
+  });
+
+  // Filter out any null values that represent removed cards
+  const finalCardsOnTable = updatedCardsOnTable.filter(item => item !== null);
+
+  if (thisCardShouldGoBackToPlayersHand) {
+    setPlayersHand(prev => [...prev, thisCardShouldGoBackToPlayersHand]);
+    setCardsOnTable(finalCardsOnTable);
+  }
+};
+
+
+
 const onSubmit = () => {
   setPlayerScorePile((prev) => [...prev, ...matchedSelectedCards, chosenCardFromHand])
 
@@ -152,22 +207,9 @@ const onSubmit = () => {
 console.log(playerScorePile, 'playerScorepile')
 
   
-  // const choseWhichCardToPlay = (card) => {
-  //   //togglar
-  //   if (card === chosenCardToPlay) {
-  //     setChosenCardToPlay(null);
-  //     setSelectedCards([]);
-  //     setMatchedSelectedCards([])
-
-  //   } else {
-  //     setChosenCardToPlay(card);
-  //     setSelectedCards([]);
-  //     setMatchedSelectedCards([])
-  //   }
-  // };
-
   //MOVES FUNCTIONS
   const addCardToBoard = (card) => {
+    setChosenCardFromHand(card)
 
     const newPlayersHand = playersHand.filter(function(item) {
       return item !== card  
@@ -208,6 +250,8 @@ console.log(playerScorePile, 'playerScorepile')
   const [isPermittedToLayChosenCard, setIsPermittedToLayChosenCard] = useState(false)
   const [ogCardForBuild, setOgCardForBuild] = useState(null)
 
+  let testValue = 0;
+
   const buildOnCard = (card) => {
     let ranks = [];
     setShowModal(true)
@@ -231,7 +275,9 @@ console.log(playerScorePile, 'playerScorepile')
     const {
       isPermittedToLayChosenCard,
       buildUp,
-      buildDown } = countBuild(playersHand, chosenCardFromHand, ranks)
+      buildDown,
+      currentValueOfBuildPile 
+      } = countBuild(playersHand, chosenCardFromHand, ranks)
   
     
     if (buildUp) {
@@ -249,13 +295,28 @@ console.log(playerScorePile, 'playerScorepile')
     } else {
       setIsPermittedToLayChosenCard(false)
     }
-  
+    
+    testValue = currentValueOfBuildPile;
   }
 
+  //kan jag använda denna till lock? eller behöver jag göra något mindre permanent?
+  //när jag gör tp build up här så är det ju lagt. om jag ångrar mig sen i lock så måste kortet tillbaka
+  //till players hand.
+  //eller bara göra en split/pop/something? från cardsontable och tillbaka in i playershand?
+  //behöver i så fall kolla mer än bara om chosenCard ändras?
+  //eller bara ifChosenCard.rank !== nestedArray value typ..?
+  //i så fall cardsOnTable(filtrera in till nestedArray och ta bort)
+  //spara den i en variabel och pusha in till playersCards?
+  //behöver i så fall ha det i en useeffect? som kollar på chosenCardPlayersHand? (den kommer köras som fan?)
+  useEffect(() => {
+    if(playingLock) {
+      if (chosenCardFromHand !== testValue)
+        console.log('nu så ska det återställas')
+    }
 
+  }, [chosenCardFromHand])
+  
   const chosenBuild = (card, up) => {
-    //behövs eller fixas i modal?
-    // if((canBuildUp || canBuildDown) && isPermittedToLayChosenCard) {
   
       const newPlayersHand = playersHand.filter(function(item) {
         return item !== chosenCardFromHand  
@@ -281,8 +342,15 @@ console.log(playerScorePile, 'playerScorepile')
       setCardsOnTable(updatedCardsOnTable)
       setPlayersHand(newPlayersHand)
       setShowModal(false)
-      // }
   
+  }
+
+  const testLock = (card) => {
+    //först bygger man till något man har på hand
+    buildOnCard(card)
+
+    //sen pickcards from board? (med fortfarande samma värde som man byggde)
+    //sen submit och då ska de istället för att hamna i playerspile så pusha in i arrayen?
   }
 
 
@@ -348,6 +416,8 @@ console.log(playerScorePile, 'playerScorepile')
       //då köra datorns drag, sen sätta isPlating till true?
 
     } else if(playingLock) {
+      // testLock(card)
+      buildOnCard(card)
       console.log('you are playing lock')
 
     } else if(playingPickUp) {
@@ -377,6 +447,8 @@ console.log(playerScorePile, 'playerScorepile')
   const onGoBack = () => {
     resetChosenMove()
     setShowAllButtons(true)
+    regretChosenCardPlacedOnTableBeforeSubmit()
+    setChosenCardFromHand([])
   }
 
   const playerCardIsClicked = (card) => {
@@ -498,18 +570,23 @@ console.log(playerScorePile, 'playerScorepile')
 
       <div className="card-and-options-wrapper">
             {/* <p className='error'>{errorMessage && errorMessage}</p> */}
-          {showAllButtons &&
-            <p>What do you wish to do?</p>
-          }
-          <div className='options'>
+        {showAllButtons &&
+          <p>What do you wish to do?</p>
+        }
+        <div className='options'>
             {
               !showAllButtons &&
+              <>
               <button 
               className='back-btn btn' 
               id="back" 
               onClick={onGoBack}>
                 Go back
               </button>
+              <button onClick={regretChosenCardPlacedOnTableBeforeSubmit} className='btn'>
+                Regret
+              </button>
+              </>
             }
             {playingLay ?
             <p>Click on the card you wish to add to the board</p>
@@ -582,6 +659,16 @@ console.log(playerScorePile, 'playerScorepile')
             </button>
             </>
           }
+          {/* <div className="players-mulle-pile">
+          {playerMullePile.map((card, index) => (
+            <Card 
+            card={card}
+            key={card.id}
+            index={index}
+            />
+          ))
+          }
+          </div>
           <div className="players-score-pile">
           {playerScorePile.map((card, index) => (
             <Card 
@@ -592,10 +679,33 @@ console.log(playerScorePile, 'playerScorepile')
             />
           ))
           }
-        </div>
+          </div> */}
+          <div className="player-piles">
+            <div className="players-mulle-pile">
+              {playerMullePile.map((card, index) => (
+                <Card 
+                card={card}
+                key={card.id}
+                index={index}
+                />
+              ))
+              }
+            </div>
+            <div className="players-score-pile">
+              {playerScorePile.map((card, index) => (
+                <Card 
+                card={card}
+                key={card.id}
+                scorePileIndex={index}
+                scorePile
+                />
+              ))
+              }
+            </div>
+          </div>
       </div>
       <div className={`cards-player ${handActive && 'active'}`}>
-      {playersHand?.map((card) => (
+        {playersHand?.map((card) => (
           <Card 
           key={card.id} 
           card={card} 
@@ -609,7 +719,6 @@ console.log(playerScorePile, 'playerScorepile')
           />
         ))}
       </div>
-
       </div>
     </div>
   )
