@@ -40,6 +40,8 @@ const Mulle = () => {
 
   const [showAllButtons, setShowAllButtons] = useState(true)
   const [isCardAdded, setIsCardAdded] = useState(false);
+  const [chosenCardFromHand, setChosenCardFromHand] = useState([])
+
 
   const dispurseFirstRoundOfCards = () => {
     const newDeck = [...activeDeck];
@@ -60,49 +62,10 @@ const Mulle = () => {
   }, [])
 
   //dessa två för pick up cards on board?
-  // const pickUpCardsFromBoard = (selectedCard, nestedArray) => {
-  
-  //   const newSelectedCards = selectedCards.includes(selectedCard)
-  //     ? selectedCards.filter((c) => c !== selectedCard)
-  //     : [...selectedCards, selectedCard];
-    
-  
-  //   const totalValue = newSelectedCards.reduce((sum, c) => sum + parseInt(c.rank, 10), 0);
-  //   const chosenValue = parseInt(chosenCardFromHand.rank, 10);
-  
-  //   if (totalValue > chosenValue) {
-  //     //fixa felmeddelande
-  //     setErrorMessage('Total value exceeds chosen card rank');
-  //   } else {
-  //     setSelectedCards(newSelectedCards);
-  
-  //     if (totalValue === chosenValue) {
-  //       setMatchedSelectedCards((prev) => [...prev, ...newSelectedCards]);
-  //       //start a new så att säga. 
-  //       //markera synligt att de är "par"
-  //       //gör så man kan klicka på andra.
-  //       // setVisibleCards((prev) => prev.filter((c) => !newSelectedCards.includes(c)));
-  //       setSelectedCards([]);
-  //     }
-  //   }
-  // };
+  const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
 
-  // const choseWhichCardToPlay = (card) => {
-//   //togglar
-//   if (card === chosenCardToPlay) {
-//     setChosenCardToPlay(null);
-//     setSelectedCards([]);
-//     setMatchedSelectedCards([])
-
-//   } else {
-//     setChosenCardToPlay(card);
-//     setSelectedCards([]);
-//     setMatchedSelectedCards([])
-//   }
-// };
-const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
-  const clickedCardId = event.target.id; // ID of the clicked card
-  const chosenCardValue = chosenCardFromHand.rank; // Assuming rank is already a number
+  const clickedCardId = event.target.id; 
+  const chosenCardValue = chosenCardFromHand.rank; 
 
   // 1. Handle Nested Array Separately
   if (nestedArray) {
@@ -121,11 +84,11 @@ const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
       }
       // Clear selected cards when a nested array is matched
       setSelectedCards([]);
-      setErrorMessage(''); // Clear any error message
-      return; // Exit after handling the nested array
+      setErrorMessage('');
+      return;
     } else {
-      setErrorMessage('Nested array total does not match the chosen card rank');
-      return; // Exit if the nested array doesn't match
+      setErrorMessage('This stack of cards total does not match your chosen card rank');
+      return;
     }
   }
 
@@ -142,7 +105,7 @@ const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
     setErrorMessage('Total value exceeds chosen card rank');
   } else {
     setSelectedCards(newSelectedCards);
-    setErrorMessage(''); // Clear any previous error messages
+    setErrorMessage(''); 
 
     // Match if total value equals chosen card's rank
     if (selectedCardsTotalValue === chosenCardValue) {
@@ -161,13 +124,33 @@ const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
   }
 };
 
-  
+const onSubmit = () => {
+  setPlayerScorePile((prev) => [...prev, ...matchedSelectedCards, chosenCardFromHand])
 
+  const newPlayersHand = playersHand.filter(function(item) {
+    return item !== chosenCardFromHand
+  })
+  const newCardsOnTable = cardsOnTable.filter(item => {
+    if (Array.isArray(item)) {
+      // If item is a nested array, check if any card in matchedSelectedCards is inside this array
+      return !item.some(nestedCard => 
+        matchedSelectedCards.some(matchedCard => matchedCard.id === nestedCard.id)
+      );
+    } else {
+      // If item is a single card, just check if it's in matchedSelectedCards
+      return !matchedSelectedCards.some(matchedCard => matchedCard.id === item.id);
+    }
+  });
   
+  resetChosenMove()
+  setCardsOnTable(newCardsOnTable)
+  setPlayersHand(newPlayersHand)
+  setMatchedSelectedCards([])
+  setChosenCardFromHand([])
+}
 
-  
-  
-  
+console.log(playerScorePile, 'playerScorepile')
+
   
   // const choseWhichCardToPlay = (card) => {
   //   //togglar
@@ -183,78 +166,7 @@ const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
   //   }
   // };
 
-
-  // const addOneNewCard = (cardRemoved, player) => {
-  //   const newDeck = [...activeDeck];
-  //   const dealtCard = newDeck.splice(0, 1)[0];
-  //   setActiveDeck(newDeck)
-
-  //   if(player) {
-  //     const newHand = playersHand?.filter(card => {
-  //       return card.id !== cardRemoved.id
-  //     })
-      
-  //     newHand.push(dealtCard)
-  //     setPlayersHand(newHand)
-
-  //   } else {
-  //     const newHand = opponentsHand?.filter(card => {
-  //       return card.id !== cardRemoved.id
-  //     })
-      
-  //     newHand.push(dealtCard)
-  //     setOpponentsHand(newHand)
-
-  //   }
-
-  // }
-
-  // useEffect(() => {
-  //   if (opponentsHand && !isCardAdded) {
-  //     const delay = setTimeout(() => {
-  //       addOneNewCard({ id: 'clubs-2-1' }, false);
-  //       setIsCardAdded(true);
-  //     }, 2000); // Delay of 3 seconds (3000 milliseconds)
-
-  //     // Clear timeout if the component unmounts
-  //     return () => clearTimeout(delay);
-  //   }
-  // }, [opponentsHand]);
-
-
-  // useEffect(() => {
-  //   console.log(playerScorePile, 'playerScorePile')
-  // }, [playerScorePile]);
-  // useEffect(() => {
-  //   console.log(playerMullePile, 'playerMullePile')
-  // }, [playerMullePile]);
-
-  // const submitPoints = () => {
-
-  //   setPlayerScorePile((prev) => [...prev, ...matchedSelectedCards, chosenCardToPlay])
-
-  //   //dela ut nytt kort och uppdatera kortleken
-  //   const newDeck = [...activeDeck];
-  //   const [newDealtCard] = newDeck.splice(0, 1);
-  //   setActiveDeck(newDeck);
-
-  //   const newPlayersHand = playersHand.filter(function(item) {
-  //     return item !== chosenCardToPlay  
-  //   })
-    
-  //   const newCardsOnTable = cardsOnTable.filter((item) => 
-  //     !matchedSelectedCards.some((selectedCard) => selectedCard.id === item.id)
-  //   );
-
-  //   setCardsOnTable(newCardsOnTable)
-  //   setPlayersHand([...newPlayersHand, newDealtCard ])
-  //   setMatchedSelectedCards([])
-
-  // }
-
   //MOVES FUNCTIONS
- 
- 
   const addCardToBoard = (card) => {
 
     const newPlayersHand = playersHand.filter(function(item) {
@@ -271,7 +183,6 @@ const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
     setMatchedSelectedCards([])
   }
 
-  const [chosenCardFromHand, setChosenCardFromHand] = useState([])
 
   const pickMulleTable = (card) => {
     if((chosenCardFromHand.rank !== card.rank) && (chosenCardFromHand.suit !== card.suit)) {
@@ -373,9 +284,6 @@ const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
       // }
   
   }
-
-
-
 
 
   const chooseMoveToMake = (e) => {
@@ -490,6 +398,8 @@ const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
 
   }
 
+  console.log(playerScorePile, 'playerScorePile')
+
   return (
     <div className='Mulle'>
       {/* <div className={`cards-table ${boardActive && 'active'}`}>
@@ -583,6 +493,7 @@ const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
             );
           }
         })}
+
       </div>
 
       <div className="card-and-options-wrapper">
@@ -616,7 +527,15 @@ const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
             </>
             :
             playingPickUp ?
+            <>
             <p>Click on the card in your hand you wish to use to take cards from the board</p>
+            <button 
+              className='submit-btn btn' 
+              id="submit" 
+              onClick={onSubmit}>
+                Submit
+              </button>
+            </>
             :
             playingTired &&
             <p>Chose the Built or Locked pile of cards you wish to tire, then choose the card from your hand you wish to add</p>
@@ -663,8 +582,18 @@ const pickUpCardsFromBoard = (selectedCard, nestedArray, event) => {
             </button>
             </>
           }
-        
+          <div className="players-score-pile">
+          {playerScorePile.map((card, index) => (
+            <Card 
+            card={card}
+            key={card.id}
+            scorePileIndex={index}
+            scorePile
+            />
+          ))
+          }
         </div>
+      </div>
       <div className={`cards-player ${handActive && 'active'}`}>
       {playersHand?.map((card) => (
           <Card 

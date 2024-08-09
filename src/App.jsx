@@ -29,7 +29,7 @@ const location = useLocation();
         <Route path="/games" element={<Games />} />
         <Route path="/games/mulle" element={<Mulle />} />
       </Routes>
-      <Footer />
+      {!isGamesRoute && <Footer />}
     </>
   )
 }

@@ -21,3 +21,16 @@
 .hej {
   border: 3px solid purple;
 }
+
+.card-in-pile {
+  position: absolute;
+  top: 0;
+  border: 0.1px solid rgba(24, 24, 24, 0.925);
+  border-radius: 8px;
+}
+
+.back-of-card-img, .visible-card {
+  object-fit: stretch;
+  height: 100%;
+  width: 100%;
+}
